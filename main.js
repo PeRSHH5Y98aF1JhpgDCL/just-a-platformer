@@ -44,7 +44,7 @@ document.getElementById("levelLayer").addEventListener("mousedown", function(inp
 		drawLevel();
 	}
 });
-document.getElementById("levelLayer").addEventListener("contextmenu", function(){return false;});
+document.addEventListener("contextmenu", function(){return false;});
 
 document.addEventListener("keydown", function(input){
 	let key = input.code;
