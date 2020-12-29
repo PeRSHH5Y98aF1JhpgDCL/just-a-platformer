@@ -140,11 +140,14 @@ document.addEventListener("keydown", function(input){
 			if (input.shiftKey) {
 				let data = prompt("Please enter level data.");
 				if (data) {
-					level = JSON.parse(data);
+					data = JSON.parse(data);
+					level = data[0];
+					player.spawnPoint = data[1];
+					respawn();
 					drawLevel();
 				}
 			} else {
-				id("exportArea").value = JSON.stringify(level);
+				id("exportArea").value = JSON.stringify([level,player.spawnPoint]);
 				id("exportArea").style.display = "inline";
 				id("exportArea").select();
 				document.execCommand("copy")
@@ -486,6 +489,5 @@ function arraysEqual(a, b) {
 	return true;
 }
 respawn();
-drawPlayer();
 drawLevel();
 window.requestAnimationFrame(nextFrame);
