@@ -2,9 +2,7 @@ var gameSpeed = 1;
 var playerSize = 20;
 var blockSize = 50;
 const player = {
-	spawnPoint: [4,7,0,1,400],
-	levelCoord: [0,1],
-	get currentLevel() {return worldMap[player.levelCoord[0]][player.levelCoord[1]]},
+	spawnPoint: [4,7,400],
 	x: 215,
 	y: 367.5,
 	xv: 0,
@@ -19,80 +17,17 @@ const control = {
 	left: false,
 	right: false,
 };
-const worldMap = [
-	[5,0,1],
-	[4,3,2],
-]
-const levels = [
-	[
-		[1,1,1,1,1,1,1,1,1],
-		[1,0,0,0,1,0,0,0,1],
-		[1,0,0,0,0,1,0,1,1],
-		[1,0,0,1,0,0,0,0,2],
-		[1,0,0,0,2,0,1,3,1],
-		[1,0,0,0,2,0,0,0,1],
-		[0,0,5,0,1,0,0,0,1],
-		[1,0,0,0,2,0,1,1,1],
-		[1,2,0,1,1,0,0,8,0],
-		[1,1,1,1,1,1,1,1,1],
-	],
-	[
-		[1,1,1,1,1,1,1,1,1],
-		[1,0,0,1,0,0,0,1,1],
-		[1,0,0,0,1,0,0,1,3],
-		[1,0,1,0,2,0,0,0,0],
-		[1,0,2,0,1,0,5,0,1],
-		[1,0,1,0,0,0,0,0,1],
-		[1,0,1,1,1,1,1,1,1],
-	],
-	[
-		[1,1,1,1,1,1,1,0,1],
-		[1,0,2,0,5,0,0,0,1],
-		[1,0,0,0,0,1,0,0,2],
-		[1,0,1,0,0,0,0,0,1],
-		[1,0,0,0,0,0,1,3,1],
-		[1,0,1,0,0,0,0,0,1],
-		[1,0,2,0,0,0,0,0,5],
-		[1,0,0,1,1,1,1,1,1],
-		[1,0,0,0,0,0,0,0,0],
-		[1,1,1,1,1,1,1,1,1],
-	],
-	[
-		[1,1,1,1,1,1,1],
-		[0,0,0,0,0,0,0],
-		[1,1,1,1,1,1,1],
-		[1,0,0,0,0,0,1],
-		[1,0,1,1,1,0,1],
-		[1,0,0,0,1,0,1],
-		[1,0,0,0,0,0,1],
-		[1,0,1,1,1,0,1],
-		[1,0,1,0,1,0,1],
-		[1,0,1,1,1,0,1],
-		[1,0,0,0,0,0,1],
-		[1,0,1,1,1,0,1],
-		[1,0,0,0,1,0,1],
-		[1,0,0,0,0,0,1],
-		[1,1,1,1,1,1,1],
-	],
-	[
-		[1,1,0,1,1,1,1],
-		[1,1,0,2,0,5,1],
-		[2,0,0,0,0,2,1],
-		[5,0,7,2,0,1,1],
-		[2,0,0,2,0,0,5],
-		[1,1,1,1,1,3,1],
-		[0,0,0,0,0,0,2],
-		[1,1,1,1,1,1,1],
-	],
-	[
-		[5,5,5,5,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],
-		[5,1,1,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		[5,1,5,5,1,0,0,2,0,0,8,0,0,2,2,3,1,0,5,7,2,0,5,7,8,5,0,0,0,5,0,0,0,2,0,0,2,0,0,1,3,1],
-		[0,0,0,0,7,0,1,2,7,7,2,0,7,0,2,0,0,0,2,0,0,0,8,0,0,2,3,1,0,2,0,0,0,0,0,0,2,0,0,0,0,1],
-		[5,5,5,5,1,0,0,8,0,0,0,2,0,8,0,7,0,0,8,0,0,2,2,0,0,0,0,5,0,8,0,0,2,0,0,0,0,0,0,1,0,1],
-		[5,1,1,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
-		[5,1,5,5,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,1,0,1],
-	],
+const level = [
+	[1,1,1,1,1,1,1,1,1],
+	[1,0,0,0,1,0,0,0,1],
+	[1,0,0,0,0,1,0,1,1],
+	[1,0,0,1,0,0,0,0,2],
+	[1,0,0,0,2,0,1,3,1],
+	[1,0,0,0,2,0,0,0,1],
+	[0,0,5,0,1,0,0,0,1],
+	[1,0,0,0,2,0,1,1,1],
+	[1,2,0,1,1,0,0,8,0],
+	[1,1,1,1,1,1,1,1,1],
 ];
 const hasHitbox = [1,5];
 
@@ -141,19 +76,10 @@ document.addEventListener("keyup", function(input){
 });
 
 function getBlockType(x,y) {
-	if (x < 0 || x >= levels[player.currentLevel].length || y < 0 || y >= levels[player.currentLevel][0].length) {
-		if (levels[player.currentLevel][x-1] != undefined) {
-			if (levels[player.currentLevel][x-1][y] == 0) return 6;
-		}
-		if (levels[player.currentLevel][x+1] != undefined) {
-			if (levels[player.currentLevel][x+1][y] == 0) return 6;
-		}
-		if (levels[player.currentLevel][x] != undefined) {
-			if (levels[player.currentLevel][x][y-1] == 0 || levels[player.currentLevel][x][y+1] == 0) return 6;
-		}
+	if (x < 0 || x >= level.length || y < 0 || y >= level[0].length) {
 		return 1;
 	}
-	return levels[player.currentLevel][x][y];
+	return level[x][y];
 }
 function isTouching(dir, type) {
 	let x1 = player.x;
@@ -207,8 +133,6 @@ function nextFrame(timeStamp) {
 	if (dt < 100) {
 		let xprev = player.x;
 		let yprev = player.y;
-		let lvlxprev = player.levelCoord[0];
-		let lvlyprev = player.levelCoord[1];
 		// position change based on velocity
 		player.x += player.xv * dt / 500 * gameSpeed;
 		player.y += player.yv * dt / 500 * gameSpeed;
@@ -268,20 +192,19 @@ function nextFrame(timeStamp) {
 		y2b = Math.floor(y2/blockSize);
 		// checkpoint
 		if (isTouching("any",3)) {
-			levels[worldMap[player.spawnPoint[2]][player.spawnPoint[3]]][player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+			level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
 			if (getBlockType(x1b,y1b) == 3) {
-				player.spawnPoint = [x1b,y1b,player.levelCoord[0],player.levelCoord[1],player.g];
-				levels[player.currentLevel][x1b][y1b] = 4;
+				player.spawnPoint = [x1b,y1b,player.g];
+				level[x1b][y1b] = 4;
 			} else if (getBlockType(x2b,y1b) == 3) {
-				player.spawnPoint = [x2b,y1b,player.levelCoord[0],player.levelCoord[1],player.g];
-				levels[player.currentLevel][x2b][y1b] = 4;
+				player.spawnPoint = [x2b,y1b,player.g];
+				level[x2b][y1b] = 4;
 			} else if (getBlockType(x1b,y2b) == 3) {
-				player.spawnPoint = [x1b,y2b,player.levelCoord[0],player.levelCoord[1],player.g];
-				levels[player.currentLevel][x1b][y2b] = 4;
-				drawLevel();
+				player.spawnPoint = [x1b,y2b,player.g];
+				level[x1b][y2b] = 4;
 			} else if (getBlockType(x2b,y2b) == 3) {
-				player.spawnPoint = [x2b,y2b,player.levelCoord[0],player.levelCoord[1],player.g];
-				levels[player.currentLevel][x2b][y2b] = 4;
+				player.spawnPoint = [x2b,y2b,player.g];
+				level[x2b][y2b] = 4;
 			}
 			drawLevel();
 		}
@@ -301,49 +224,20 @@ function nextFrame(timeStamp) {
 			player.yv = 0;
 			player.g = player.spawnPoint[4];
 		}
-		x1 = player.x + 1;
-		x2 = player.x+playerSize - 1;
-		y1 = player.y + 1;
-		y2 = player.y+playerSize - 1;
-		x1b = Math.floor(x1/blockSize);
-		x2b = Math.floor(x2/blockSize);
-		y1b = Math.floor(y1/blockSize);
-		y2b = Math.floor(y2/blockSize);
-		// level warp
-		if (isTouching("any",6)) {
-			if (x1 < 0) { // left
-				player.levelCoord[0]--;
-				player.x = levels[player.currentLevel].length * blockSize - playerSize;
-				player.y = blockSize*levels[player.currentLevel][levels[player.currentLevel].length-1].findIndex(x => x==0)+(y1+blockSize)%blockSize;
-			} else if (x2 > levels[player.currentLevel].length * blockSize) { // right
-				player.levelCoord[0]++;
-				player.x = 0;
-				player.y = blockSize*levels[player.currentLevel][0].findIndex(x => x==0)+(y1+blockSize)%blockSize;
-			} else if (y1 < 0) { // up
-				player.levelCoord[1]++;
-				player.y = levels[player.currentLevel][0].length * blockSize - playerSize;
-				player.x = blockSize*levels[player.currentLevel].findIndex(x => x[x.length-1]==0)+(x1+blockSize)%blockSize;
-			} else if (y2 > levels[player.currentLevel][0].length * blockSize) { // down
-				player.levelCoord[1]--;
-				player.y = 0;
-				player.x = blockSize*levels[player.currentLevel].findIndex(x => x[0]==0)+(x1+blockSize)%blockSize;
-			}
-		}
 		// key input
 		if (control.up && player.canJump) player.yv = -player.g/2;
 		if (control.left) player.xv = -100;
 		if (control.right) player.xv = 100;
 		// draw checks
 		if (player.x != xprev || player.y != yprev) drawPlayer();
-		if (player.levelCoord[0] != lvlxprev || player.levelCoord[1] != lvlyprev) drawLevel();
 	}
 	window.requestAnimationFrame(nextFrame);
 }
 function drawPlayer() {
 	let canvas = document.getElementById("playerLayer");
 	let pL = canvas.getContext("2d");
-	canvas.width = levels[player.currentLevel].length*blockSize;
-	canvas.height = levels[player.currentLevel][0].length*blockSize;
+	canvas.width = level.length*blockSize;
+	canvas.height = level[0].length*blockSize;
 	pL.clearRect(0,0,canvas.width,canvas.height);
 	pL.fillStyle = "#0000FF";
 	pL.fillRect(Math.floor(player.x), Math.floor(player.y), playerSize, playerSize);
@@ -352,11 +246,11 @@ function drawPlayer() {
 function drawLevel() {
 	let canvas = document.getElementById("levelLayer");
 	let lL = canvas.getContext("2d");
-	canvas.width = levels[player.currentLevel].length*blockSize;
-	canvas.height = levels[player.currentLevel][0].length*blockSize;
+	canvas.width = level.length*blockSize;
+	canvas.height = level[0].length*blockSize;
 	lL.clearRect(0,0,canvas.width,canvas.height);
-	for (let x in levels[player.currentLevel]) {
-		for (let y in levels[player.currentLevel][x]) {
+	for (let x in level) {
+		for (let y in level[x]) {
 			lL.lineWidth = blockSize*3/25;
 			let xb = x * blockSize;
 			let yb = y * blockSize;
@@ -460,17 +354,17 @@ function drawLevel() {
 	adjustScreen();
 }
 function adjustScreen() {
-	let lvlx = Math.floor((window.innerWidth - levels[player.currentLevel].length*blockSize) / 2);
+	let lvlx = Math.floor((window.innerWidth - level.length*blockSize) / 2);
 	if (lvlx < 0) {
 		lvlx = Math.floor(window.innerWidth/2) - Math.floor(player.x+playerSize/2);
 		if (lvlx > 0) lvlx = 0;
-		if (lvlx < window.innerWidth - levels[player.currentLevel].length*blockSize) lvlx = Math.floor(levels[player.currentLevel].length*blockSize - window.innerWidth);
+		if (lvlx < window.innerWidth - level.length*blockSize) lvlx = Math.floor(level.length*blockSize - window.innerWidth);
 	}
-	let lvly = Math.floor((window.innerHeight - levels[player.currentLevel][0].length*blockSize) / 2);
+	let lvly = Math.floor((window.innerHeight - level[0].length*blockSize) / 2);
 	if (lvly < 0) {
 		lvly = Math.floor(window.innerHeight/2) - Math.floor(player.y+playerSize/2);
 		if (lvly > 0) lvly = 0;
-		if (lvly < window.innerHeight - levels[player.currentLevel][0].length*blockSize) lvly = Math.floor(window.innerHeight - levels[player.currentLevel][0].length*blockSize);
+		if (lvly < window.innerHeight - level[0].length*blockSize) lvly = Math.floor(window.innerHeight - level[0].length*blockSize);
 	}
 	document.getElementById("playerLayer").style.left = lvlx+"px";
 	document.getElementById("levelLayer").style.left = lvlx+"px";
@@ -486,4 +380,6 @@ function arraysEqual(a, b) {
 	}
 	return true;
 }
+drawPlayer();
+drawLevel();
 window.requestAnimationFrame(nextFrame);
