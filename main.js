@@ -242,6 +242,7 @@ function drawPlayer() {
 	canvas.height = level[0].length*blockSize;
 	pL.clearRect(0,0,canvas.width,canvas.height);
 	pL.fillStyle = "#0000FF";
+	if (player.godMode) pL.fillStyle = "#FFFF00";
 	pL.fillRect(Math.floor(player.x), Math.floor(player.y), playerSize, playerSize);
 	adjustScreen();
 }
