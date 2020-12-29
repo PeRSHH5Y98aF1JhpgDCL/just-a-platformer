@@ -301,15 +301,16 @@ function nextFrame(timeStamp) {
 	window.requestAnimationFrame(nextFrame);
 }
 function drawPlayer() {
+	adjustScreen();
 	let canvas = document.getElementById("playerLayer");
 	let pL = canvas.getContext("2d");
 	pL.clearRect(0,0,canvas.width,canvas.height);
 	pL.fillStyle = "#0000FF";
 	if (player.godMode) pL.fillStyle = "#FFFF00";
 	pL.fillRect(Math.floor(player.x), Math.floor(player.y), playerSize, playerSize);
-	adjustScreen();
 }
 function drawLevel() {
+	adjustScreen();
 	let canvas = document.getElementById("levelLayer");
 	let lL = canvas.getContext("2d");
 	lL.clearRect(0,0,canvas.width,canvas.height);
@@ -415,7 +416,6 @@ function drawLevel() {
 			}
 		}
 	}
-	adjustScreen();
 }
 function adjustScreen() {
 	let lvlx = Math.floor((window.innerWidth - level.length*blockSize) / 2);
