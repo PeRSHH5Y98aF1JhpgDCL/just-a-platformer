@@ -4,6 +4,19 @@
 		<title>just a platformer</title>
 	</head>
 	<body onresize="adjustScreen()" style="height:100%; margin:0; overflow:hidden">
+		<span id="info">
+			Width: <span id="lvlWidth">10</span><br>
+			Height: <span id="lvlHeight">9</span><br>
+			Left Click: <span id="selectedBlock0">1: Solid Block</span><br>
+			Right Click: <span id="selectedBlock1">0: Empty Space</span><br>
+		</span>
+		<span id="control">
+			LMB & RMB: Place block<br>
+			LMB + [ctrl]: Move player to cursor<br>
+			[,] & [.]: Cycle LMB block type<br>
+			[,] & [.] + [shift]: Cycle RMB block type<br>
+			[G]: Toggle god mode
+		</span>
 		<canvas id="playerLayer" style="position:absolute"></canvas>
 		<canvas id="levelLayer" style="position:absolute"></canvas>
 	</body>
