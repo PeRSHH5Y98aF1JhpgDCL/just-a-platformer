@@ -137,6 +137,12 @@ document.addEventListener("keydown", function(input){
 				id("control").style.display = "none";
 			} else if (id("control").style.display != "inline") id("control").style.display = "inline";
 			break;
+		case "KeyE":
+			if (input.shiftKey) {
+				let data = prompt("Please enter level data.");
+				if (data) level = JSON.parse(data);
+			} else alert("Here's your level data. :D/n" + JSON.stringify(level));
+			break;
 	}
 });
 document.addEventListener("keyup", function(input){
