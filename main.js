@@ -72,11 +72,11 @@ document.addEventListener("keydown", function(input){
 			break;
 		case "Comma":
 			player.selectedBlock[input.shiftKey?1:0]--;
-			document.getElementById("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0];
+			document.getElementById("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0]+":"+blockName[player.selectedBlock[input.shiftKey?1:0]];
 			break;
 		case "Period":
 			player.selectedBlock[input.shiftKey?1:0]++;
-			document.getElementById("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0];
+			document.getElementById("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0]+":"+blockName[player.selectedBlock[input.shiftKey?1:0]];
 			break;
 	}
 });
