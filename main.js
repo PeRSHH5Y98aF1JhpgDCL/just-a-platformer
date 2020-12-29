@@ -217,7 +217,6 @@ function nextFrame(timeStamp) {
 		}
 		// death block
 		if (isTouching("any",2) && !player.godMode) {
-			player.levelCoord = [player.spawnPoint[2],player.spawnPoint[3]];
 			player.x = player.spawnPoint[0] * blockSize + (blockSize - playerSize)/2;
 			player.y = player.spawnPoint[1] * blockSize + (blockSize - playerSize)/2;
 			player.xv = 0;
