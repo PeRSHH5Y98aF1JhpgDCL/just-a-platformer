@@ -35,7 +35,7 @@ const hasHitbox = [1,5];
 const blockName = ["Empty Space","Solid Block","Death Block","Deactivated Check Point","Activated Check Point (Unavailable)","Bounce Block","Warp Block (Unavailable)","Gravity Up Block","Gravity Down Block"];
 
 id("levelLayer").addEventListener("mousedown", function(input){
-	if (input.ctrlKey) {
+	if (input.shiftKey) {
 		player.x = input.offsetX;
 		player.y = input.offsetY;
 	} else {
@@ -67,17 +67,46 @@ document.addEventListener("keydown", function(input){
 		case "KeyD":
 			control.right = true;
 			break;
-		case "KeyG":
-			player.godMode = !player.godMode;
-			drawPlayer();
-			break;
 		case "Comma":
 			player.selectedBlock[input.shiftKey?1:0]--;
+			if (player.selectedBlock[input.shiftKey?1:0] < 0) player.selectedBlock[input.shiftKey?1:0] = blockName.length-1;
 			id("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0]+": "+blockName[player.selectedBlock[input.shiftKey?1:0]];
 			break;
 		case "Period":
 			player.selectedBlock[input.shiftKey?1:0]++;
+			if (player.selectedBlock[input.shiftKey?1:0] > blockName.length-1) player.selectedBlock[input.shiftKey?1:0] = 0;
 			id("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0]+": "+blockName[player.selectedBlock[input.shiftKey?1:0]];
+			break;
+		case "Minus":
+			if (input.shiftKey) {
+				if (level[0].length > 1) {
+					for (let i in level) level[i].length--;
+					id("lvlHeight").innerHTML = level[0].length;
+				}
+			} else {
+				if (level.length > 1) {
+					level.length--;
+					id("lvlWidth").innerHTML = level.length;
+				}
+			}
+			break;
+		case "Equal":
+			if (input.shiftKey) {
+				for (let i in level) {
+					level[i].length++;
+					level[i][level[i].length-1] = 0;
+				}
+				id("lvlHeight").innerHTML = level[0].length;
+			} else {
+				level.length++;
+				level[level.length-1].length = level[0].length;
+				level[level.length-1].fill(0);
+				id("lvlWidth").innerHTML = level.length;
+			}
+			break;
+		case "KeyG":
+			player.godMode = !player.godMode;
+			drawPlayer();
 			break;
 		case "KeyI":
 			if (id("info").style.display != "none") {
