@@ -221,7 +221,7 @@ function nextFrame(timeStamp) {
 			player.y = player.spawnPoint[1] * blockSize + (blockSize - playerSize)/2;
 			player.xv = 0;
 			player.yv = 0;
-			player.g = player.spawnPoint[4];
+			player.g = player.spawnPoint[2];
 		}
 		// key input
 		if (control.up && player.canJump) player.yv = -player.g/2;
