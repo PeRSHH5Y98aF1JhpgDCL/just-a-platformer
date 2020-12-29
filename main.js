@@ -31,6 +31,7 @@ const level = [
 	[1,1,1,1,1,1,1,1,1],
 ];
 const hasHitbox = [1,5];
+const blockName = ["Empty Space","Solid Block","Death Block","Deactivated Check Point","Activated Check Point (Unavailable)","Bounce Block","Warp Block (Unavailable)","Gravity Up Block","Gravity Down Block"];
 
 document.getElementById("levelLayer").addEventListener("mousedown", function(input){
 	if (input.ctrlKey) {
@@ -70,10 +71,12 @@ document.addEventListener("keydown", function(input){
 			drawPlayer();
 			break;
 		case "Comma":
-			player.selectedBLock[input.shiftKey?1:0]--;
+			player.selectedBlock[input.shiftKey?1:0]--;
+			document.getElementById("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0];
 			break;
 		case "Period":
-			player.selectedBLock[input.shiftKey?1:0]++;
+			player.selectedBlock[input.shiftKey?1:0]++;
+			document.getElementById("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0];
 			break;
 	}
 });
