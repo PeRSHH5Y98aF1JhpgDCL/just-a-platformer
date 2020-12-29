@@ -303,8 +303,8 @@ function nextFrame(timeStamp) {
 function drawPlayer() {
 	let canvas = document.getElementById("playerLayer");
 	let pL = canvas.getContext("2d");
-	id("playerLayer").width = level.length*blockSize;
-	id("playerLayer").height = level[0].length*blockSize;
+	canvas.width = level.length*blockSize;
+	canvas.height = level[0].length*blockSize;
 	pL.clearRect(0,0,canvas.width,canvas.height);
 	pL.fillStyle = "#0000FF";
 	if (player.godMode) pL.fillStyle = "#FFFF00";
@@ -314,10 +314,9 @@ function drawPlayer() {
 function drawLevel() {
 	let canvas = document.getElementById("levelLayer");
 	let lL = canvas.getContext("2d");
-	id("playerLayer").width = level.length*blockSize;
-	id("levelLayer").width = level.length*blockSize;
-	id("playerLayer").height = level[0].length*blockSize;
-	id("levelLayer").height = level[0].length*blockSize;
+	canvas.width = level.length*blockSize;
+	canvas.height = level[0].length*blockSize;
+	drawPlayer();
 	lL.clearRect(0,0,canvas.width,canvas.height);
 	for (let x in level) {
 		for (let y in level[x]) {
