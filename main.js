@@ -1,3 +1,4 @@
+var id = x => document.getElementById(x);
 var gameSpeed = 1;
 var playerSize = 20;
 var blockSize = 50;
@@ -112,7 +113,6 @@ document.addEventListener("keyup", function(input){
 	}
 });
 
-var id = x => document.getElementById(x);
 function getBlockType(x,y) {
 	if (x < 0 || x >= level.length || y < 0 || y >= level[0].length) {
 		return 1;
