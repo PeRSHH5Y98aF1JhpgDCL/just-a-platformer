@@ -21,15 +21,14 @@ const control = {
 };
 var level = [
 	[1,1,1,1,1,1,1,1,1],
-	[1,0,0,0,1,0,0,0,1],
-	[1,0,0,0,0,1,0,1,1],
-	[1,0,0,1,0,0,0,0,2],
-	[1,0,0,0,2,0,1,3,1],
-	[1,0,0,0,2,0,0,0,1],
-	[0,0,5,0,1,0,0,0,1],
-	[1,0,0,0,2,0,1,1,1],
-	[1,2,0,1,1,0,0,8,0],
-	[1,1,1,1,1,1,1,1,1],
+	[1,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,1,0,0,1],
+	[1,0,1,1,0,0,1,0,1],
+	[1,0,0,0,0,0,1,0,1],
+	[1,0,1,1,0,0,1,0,1],
+	[1,0,0,0,0,1,0,0,1],
+	[1,0,0,0,0,0,0,0,1],
+	[1,1,1,1,1,1,1,1,1]
 ];
 const hasHitbox = [1,5];
 const blockName = ["Empty Space","Solid Block","Death Block","Deactivated Check Point","Activated Check Point (Unavailable)","Bounce Block","Warp Block (Unavailable)","Gravity Up Block","Gravity Down Block"];
@@ -141,11 +140,11 @@ document.addEventListener("keydown", function(input){
 			if (input.shiftKey) {
 				let data = prompt("Please enter level data.");
 				if (data) {
-					level = JSON.parse(atob(data));
+					level = JSON.parse(data);
 					drawLevel();
 				}
 			} else {
-				id("exportArea").value = btoa(JSON.stringify(level));
+				id("exportArea").value = JSON.stringify(level);
 				id("exportArea").style.display = "inline";
 				id("exportArea").select();
 				document.execCommand("copy")
