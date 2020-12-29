@@ -148,6 +148,7 @@ document.addEventListener("keydown", function(input){
 				document.execCommand("copy")
 				id("exportArea").style.display = "none";
 				alert("Level data copied to clipboard!");
+				drawLevel();
 			}
 			break;
 	}
