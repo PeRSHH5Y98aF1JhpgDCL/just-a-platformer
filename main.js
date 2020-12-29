@@ -31,6 +31,13 @@ const level = [
 ];
 const hasHitbox = [1,5];
 
+document.getElementById("levelLayer").addEventListener("mousedown", function(input){
+	if (input.shiftKey) {
+		player.x = input.offsetX;
+		player.y = input.offsetY;
+	}
+});
+
 document.addEventListener("keydown", function(input){
 	let key = input.code;
 	switch(key) {
@@ -56,7 +63,6 @@ document.addEventListener("keydown", function(input){
 			break;
 	}
 });
-
 document.addEventListener("keyup", function(input){
 	let key = input.code;
 	switch(key) {
