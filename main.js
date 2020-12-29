@@ -33,16 +33,19 @@ const level = [
 ];
 const hasHitbox = [1,5];
 const blockName = ["Empty Space","Solid Block","Death Block","Deactivated Check Point","Activated Check Point (Unavailable)","Bounce Block","Warp Block (Unavailable)","Gravity Up Block","Gravity Down Block"];
+const bannedBlock = [4,6];
 
 id("levelLayer").addEventListener("mousedown", function(input){
 	if (input.shiftKey) {
 		player.x = input.offsetX;
 		player.y = input.offsetY;
+		player.xv = 0;
+		player.yv = 0;
 	} else {
 		let xb = Math.floor(input.offsetX/blockSize);
 		let yb = Math.floor(input.offsetY/blockSize);
-		if (input.button == 0) level[xb][yb] = player.selectedBlock[0];
-		if (input.button == 2) level[xb][yb] = player.selectedBlock[1];
+		if (input.button == 0 && !bannedBlock.includes(player.selectedBlock[0])) level[xb][yb] = player.selectedBlock[0];
+		if (input.button == 2 && !bannedBlock.includes(player.selectedBlock[1])) level[xb][yb] = player.selectedBlock[1];
 		drawLevel();
 	}
 });
