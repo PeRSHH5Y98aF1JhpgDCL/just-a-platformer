@@ -33,7 +33,7 @@ const level = [
 const hasHitbox = [1,5];
 const blockName = ["Empty Space","Solid Block","Death Block","Deactivated Check Point","Activated Check Point (Unavailable)","Bounce Block","Warp Block (Unavailable)","Gravity Up Block","Gravity Down Block"];
 
-document.getElementById("levelLayer").addEventListener("mousedown", function(input){
+id("levelLayer").addEventListener("mousedown", function(input){
 	if (input.ctrlKey) {
 		player.x = input.offsetX;
 		player.y = input.offsetY;
@@ -72,11 +72,21 @@ document.addEventListener("keydown", function(input){
 			break;
 		case "Comma":
 			player.selectedBlock[input.shiftKey?1:0]--;
-			document.getElementById("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0]+": "+blockName[player.selectedBlock[input.shiftKey?1:0]];
+			id("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0]+": "+blockName[player.selectedBlock[input.shiftKey?1:0]];
 			break;
 		case "Period":
 			player.selectedBlock[input.shiftKey?1:0]++;
-			document.getElementById("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0]+": "+blockName[player.selectedBlock[input.shiftKey?1:0]];
+			id("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0]+": "+blockName[player.selectedBlock[input.shiftKey?1:0]];
+			break;
+		case "KeyI":
+			if (id("info").style.display != "none") {
+				id("info").style.display = "none";
+			} else if (id("info").style.display != "inline") id("info").style.display = "inline";
+			break;
+		case "KeyC":
+			if (id("control").style.display != "none") {
+				id("control").style.display = "none";
+			} else if (id("control").style.display != "inline") id("info").style.display = "inline";
 			break;
 	}
 });
@@ -102,6 +112,7 @@ document.addEventListener("keyup", function(input){
 	}
 });
 
+var id = x => document.getElementById(x);
 function getBlockType(x,y) {
 	if (x < 0 || x >= level.length || y < 0 || y >= level[0].length) {
 		return 1;
@@ -393,10 +404,10 @@ function adjustScreen() {
 		if (lvly > 0) lvly = 0;
 		if (lvly < window.innerHeight - level[0].length*blockSize) lvly = Math.floor(window.innerHeight - level[0].length*blockSize);
 	}
-	document.getElementById("playerLayer").style.left = lvlx+"px";
-	document.getElementById("levelLayer").style.left = lvlx+"px";
-	document.getElementById("playerLayer").style.top = lvly+"px";
-	document.getElementById("levelLayer").style.top = lvly+"px";
+	id("playerLayer").style.left = lvlx+"px";
+	id("levelLayer").style.left = lvlx+"px";
+	id("playerLayer").style.top = lvly+"px";
+	id("levelLayer").style.top = lvly+"px";
 }
 function arraysEqual(a, b) {
 	if (a === b) return true;
