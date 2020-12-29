@@ -19,7 +19,7 @@ const control = {
 	left: false,
 	right: false,
 };
-const level = [
+var level = [
 	[1,1,1,1,1,1,1,1,1],
 	[1,0,0,0,1,0,0,0,1],
 	[1,0,0,0,0,1,0,1,1],
