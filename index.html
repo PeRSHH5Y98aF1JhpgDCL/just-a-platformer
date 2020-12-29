@@ -5,17 +5,21 @@
 	</head>
 	<body onresize="adjustScreen()" style="height:100%; margin:0; overflow:hidden">
 		<span id="info">
+			[INFO]<br>
 			Width: <span id="lvlWidth">10</span><br>
 			Height: <span id="lvlHeight">9</span><br>
 			Left Click: <span id="selectedBlock0">1: Solid Block</span><br>
 			Right Click: <span id="selectedBlock1">0: Empty Space</span><br>
-		</span>
+		</span> <br>
 		<span id="control">
+			[CONTROL]<br>
 			LMB & RMB: Place block<br>
 			LMB + [ctrl]: Move player to cursor<br>
 			[,] & [.]: Cycle LMB block type<br>
 			[,] & [.] + [shift]: Cycle RMB block type<br>
-			[G]: Toggle god mode
+			[G]: Toggle god mode<br>
+			[I]: Toggle info<br>
+			[C]: Toggle control<br>
 		</span>
 		<canvas id="playerLayer" style="position:absolute"></canvas>
 		<canvas id="levelLayer" style="position:absolute"></canvas>
