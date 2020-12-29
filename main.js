@@ -140,7 +140,10 @@ document.addEventListener("keydown", function(input){
 		case "KeyE":
 			if (input.shiftKey) {
 				let data = prompt("Please enter level data.");
-				if (data) level = JSON.parse(atob(data));
+				if (data) {
+					level = JSON.parse(atob(data));
+					drawLevel();
+				}
 			} else {
 				id("exportArea").value = btoa(JSON.stringify(level));
 				id("exportArea").style.display = "inline";
@@ -148,7 +151,6 @@ document.addEventListener("keydown", function(input){
 				document.execCommand("copy")
 				id("exportArea").style.display = "none";
 				alert("Level data copied to clipboard!");
-				drawLevel();
 			}
 			break;
 	}
