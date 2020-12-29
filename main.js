@@ -10,6 +10,7 @@ const player = {
 	g: 400,
 	canJump: false,
 	godMode: false,
+	selectedBlock: [1,0],
 };
 const control = {
 	up: false,
@@ -32,9 +33,14 @@ const level = [
 const hasHitbox = [1,5];
 
 document.getElementById("levelLayer").addEventListener("mousedown", function(input){
-	if (input.shiftKey) {
+	if (input.ctrlKey) {
 		player.x = input.offsetX;
 		player.y = input.offsetY;
+	} else {
+		let xb = Math.floor(input.offsetX/blockSize);
+		let yb = Math.floor(input.offsetY/blockSize);
+		if (input.button == 0) level[xb][yb] = player.selectedBlock[0];
+		if (input.button == 2) level[xb][yb] = player.selectedBlock[1];
 	}
 });
 
@@ -60,6 +66,12 @@ document.addEventListener("keydown", function(input){
 		case "KeyG":
 			player.godMode = !player.godMode;
 			drawPlayer();
+			break;
+		case "Comma":
+			player.selectedBLock[input.shiftKey?1:0]--;
+			break;
+		case "Period":
+			player.selectedBLock[input.shiftKey?1:0]++;
 			break;
 	}
 });
