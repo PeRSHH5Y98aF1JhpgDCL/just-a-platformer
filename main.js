@@ -94,12 +94,11 @@ document.addEventListener("keydown", function(input){
 		case "Equal":
 			if (input.shiftKey) {
 				for (let i in level) {
-					level[i].length++;
-					level[i][level[i].length-1] = 0;
+					level[i].push(0);
 				}
 				id("lvlHeight").innerHTML = level[0].length;
 			} else {
-				level.length++;
+				level.push([]);
 				level[level.length-1].length = level[0].length;
 				level[level.length-1].fill(0);
 				id("lvlWidth").innerHTML = level.length;
