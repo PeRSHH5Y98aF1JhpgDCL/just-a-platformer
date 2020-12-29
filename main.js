@@ -87,7 +87,7 @@ document.addEventListener("keydown", function(input){
 		case "KeyC":
 			if (id("control").style.display != "none") {
 				id("control").style.display = "none";
-			} else if (id("control").style.display != "inline") id("info").style.display = "inline";
+			} else if (id("control").style.display != "inline") id("control").style.display = "inline";
 			break;
 	}
 });
