@@ -89,6 +89,7 @@ document.addEventListener("keydown", function(input){
 					id("lvlWidth").innerHTML = level.length;
 				}
 			}
+			drawLevel();
 			break;
 		case "Equal":
 			if (input.shiftKey) {
@@ -103,6 +104,7 @@ document.addEventListener("keydown", function(input){
 				level[level.length-1].fill(0);
 				id("lvlWidth").innerHTML = level.length;
 			}
+			drawLevel();
 			break;
 		case "KeyG":
 			player.godMode = !player.godMode;
