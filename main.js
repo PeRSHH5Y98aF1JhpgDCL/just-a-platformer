@@ -278,7 +278,7 @@ function nextFrame(timeStamp) {
 		y2b = Math.floor(y2/blockSize);
 		// checkpoint
 		if (isTouching("any",3)) {
-			level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+			if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
 			if (getBlockType(x1b,y1b) == 3) {
 				player.spawnPoint = [x1b,y1b,player.g];
 				level[x1b][y1b] = 4;
