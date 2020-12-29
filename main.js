@@ -14,6 +14,8 @@ const player = {
 	selectedBlock: [1,0],
 };
 const control = {
+	lmb: false,
+	rmb: false,
 	up: false,
 	down: false,
 	left: false,
@@ -44,9 +46,38 @@ id("levelLayer").addEventListener("mousedown", function(input){
 	} else {
 		let xb = Math.floor(input.offsetX/blockSize);
 		let yb = Math.floor(input.offsetY/blockSize);
-		if (input.button == 0 && !bannedBlock.includes(player.selectedBlock[0])) level[xb][yb] = player.selectedBlock[0];
-		if (input.button == 2 && !bannedBlock.includes(player.selectedBlock[1])) level[xb][yb] = player.selectedBlock[1];
+		if (input.which == 1 && !bannedBlock.includes(player.selectedBlock[0])) {
+			level[xb][yb] = player.selectedBlock[0];
+			control.lmb = true;
+		} else if (input.which == 3 && !bannedBlock.includes(player.selectedBlock[1])) {
+			level[xb][yb] = player.selectedBlock[1];
+			control.rmb = true;
+		}
 		drawLevel();
+	}
+});
+id("levelLayer").addEventListener("mousemove", function(input){
+	let xb = Math.floor(input.offsetX/blockSize);
+	let yb = Math.floor(input.offsetY/blockSize);
+	if (input.which == 1 && !bannedBlock.includes(player.selectedBlock[0])) {
+		level[xb][yb] = player.selectedBlock[0];
+	} else if (input.which == 3 && !bannedBlock.includes(player.selectedBlock[1])) {
+		level[xb][yb] = player.selectedBlock[1];
+	}
+	drawLevel();
+});
+id("levelLayer").addEventListener("mouseup", function(input){
+	if (input.which == 1) {
+		control.lmb = false;
+	} else if (input.which == 3) {
+		control.rmb = false;
+	}
+});
+id("levelLayer").addEventListener("mouseleave", function(input){
+	if (input.which == 1) {
+		control.lmb = false;
+	} else if (input.which == 3) {
+		control.rmb = false;
 	}
 });
 document.addEventListener("contextmenu", function(input){input.preventDefault();});
