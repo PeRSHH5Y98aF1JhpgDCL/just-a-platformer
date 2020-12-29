@@ -141,7 +141,14 @@ document.addEventListener("keydown", function(input){
 			if (input.shiftKey) {
 				let data = prompt("Please enter level data.");
 				if (data) level = JSON.parse(atob(data));
-			} else alert("Here's your level data. :D\n" + btoa(JSON.stringify(level)));
+			} else {
+				id("exportArea").value = btoa(JSON.stringify(level));
+				id("exportArea").style.display = "inline";
+				id("exportArea").select();
+				document.execCommand("copy")
+				id("exportArea").style.display = "none";
+				alert("Level data copied to clipboard!");
+			}
 			break;
 	}
 });
