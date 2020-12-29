@@ -41,6 +41,7 @@ document.getElementById("levelLayer").addEventListener("mousedown", function(inp
 		let yb = Math.floor(input.offsetY/blockSize);
 		if (input.button == 0) level[xb][yb] = player.selectedBlock[0];
 		if (input.button == 2) level[xb][yb] = player.selectedBlock[1];
+		drawLevel();
 	}
 });
 
