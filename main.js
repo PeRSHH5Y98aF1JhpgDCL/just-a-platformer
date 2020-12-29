@@ -3,9 +3,9 @@ var gameSpeed = 1;
 var playerSize = 20;
 var blockSize = 50;
 const player = {
-	spawnPoint: [4,7,400],
-	x: 215,
-	y: 367.5,
+	spawnPoint: [4,5,400],
+	x: 0,
+	y: 0,
 	xv: 0,
 	yv: 0,
 	g: 400,
@@ -225,6 +225,13 @@ function isTouching(dir, type) {
 			|| getBlockType(x2b,y2b) == type;
 	}
 }
+function respawn() {
+	player.x = player.spawnPoint[0] * blockSize + (blockSize - playerSize)/2;
+	player.y = player.spawnPoint[1] * blockSize + (blockSize - playerSize)/2;
+	player.xv = 0;
+	player.yv = 0;
+	player.g = player.spawnPoint[2];
+}
 
 var lastFrame = 0;
 function nextFrame(timeStamp) {
@@ -318,11 +325,7 @@ function nextFrame(timeStamp) {
 		}
 		// death block
 		if (isTouching("any",2) && !player.godMode) {
-			player.x = player.spawnPoint[0] * blockSize + (blockSize - playerSize)/2;
-			player.y = player.spawnPoint[1] * blockSize + (blockSize - playerSize)/2;
-			player.xv = 0;
-			player.yv = 0;
-			player.g = player.spawnPoint[2];
+			respawn();
 		}
 		// key input
 		if (control.up && player.canJump) player.yv = -player.g/2;
@@ -482,6 +485,7 @@ function arraysEqual(a, b) {
 	}
 	return true;
 }
+respawn();
 drawPlayer();
 drawLevel();
 window.requestAnimationFrame(nextFrame);
