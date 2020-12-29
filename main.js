@@ -140,8 +140,8 @@ document.addEventListener("keydown", function(input){
 		case "KeyE":
 			if (input.shiftKey) {
 				let data = prompt("Please enter level data.");
-				if (data) level = JSON.parse(data);
-			} else alert("Here's your level data. :D/n" + JSON.stringify(level));
+				if (data) level = JSON.parse(atob(data));
+			} else alert("Here's your level data. :D\n" + btoa(JSON.stringify(level)));
 			break;
 	}
 });
