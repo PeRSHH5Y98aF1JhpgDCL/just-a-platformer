@@ -52,6 +52,7 @@ document.addEventListener("keydown", function(input){
 			break;
 		case "KeyG":
 			player.godMode = !player.godMode;
+			drawPlayer();
 			break;
 	}
 });
