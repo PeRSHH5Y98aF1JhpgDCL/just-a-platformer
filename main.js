@@ -50,6 +50,9 @@ document.addEventListener("keydown", function(input){
 		case "KeyD":
 			control.right = true;
 			break;
+		case "KeyG":
+			player.godMode = !player.godMode;
+			break;
 	}
 });
 
