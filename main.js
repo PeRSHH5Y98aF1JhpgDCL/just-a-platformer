@@ -328,10 +328,10 @@ function nextFrame(timeStamp) {
 			drawLevel();
 		}
 		// anti-grav
-		if (isTouching("any",7)) {
+		if (isTouching("any",6)) {
 			if (player.g > 0) player.g = -player.g;
 		}
-		if (isTouching("any",8)) {
+		if (isTouching("any",7)) {
 			if (player.g < 0) player.g = -player.g;
 		}
 		// death block
