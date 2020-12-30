@@ -236,6 +236,25 @@ function isTouching(dir, type) {
 			|| getBlockType(x2b,y2b) == type;
 	}
 }
+function getCoord(type) {
+	let x1 = player.x;
+	let x2 = player.x+playerSize;
+	let y1 = player.y;
+	let y2 = player.y+playerSize;
+	let x1b = Math.floor(x1/blockSize);
+	let x2b = Math.floor(x2/blockSize);
+	let y1b = Math.floor(y1/blockSize);
+	let y2b = Math.floor(y2/blockSize);
+	if (getBlockType(x1b,y1b) == type) {
+		return [x1b,y1b];
+	} else if (getBlockType(x2b,y1b) == type) {
+		return [x2b,y1b];
+	} else if (getBlockType(x1b,y2b) == type) {
+		return [x1b,y2b];
+	} else if (getBlockType(x2b,y2b) == type) {
+		return [x2b,y2b];
+	}
+}
 function respawn() {
 	player.x = player.spawnPoint[0] * blockSize + (blockSize - playerSize)/2;
 	player.y = player.spawnPoint[1] * blockSize + (blockSize - playerSize)/2;
@@ -302,30 +321,14 @@ function nextFrame(timeStamp) {
 			player.y = y2b * blockSize - playerSize;
 			if (player.g > 0 && player.yv >= 0) player.canJump = true;
 		} else if (player.g > 0 && !player.godMode) player.canJump = false;
-		x1 = player.x + 1;
-		x2 = player.x+playerSize - 1;
-		y1 = player.y + 1;
-		y2 = player.y+playerSize - 1;
-		x1b = Math.floor(x1/blockSize);
-		x2b = Math.floor(x2/blockSize);
-		y1b = Math.floor(y1/blockSize);
-		y2b = Math.floor(y2/blockSize);
 		// checkpoint
 		if (isTouching("any",3)) {
-			if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
-			if (getBlockType(x1b,y1b) == 3) {
-				player.spawnPoint = [x1b,y1b,player.g];
-				level[x1b][y1b] = 4;
-			} else if (getBlockType(x2b,y1b) == 3) {
-				player.spawnPoint = [x2b,y1b,player.g];
-				level[x2b][y1b] = 4;
-			} else if (getBlockType(x1b,y2b) == 3) {
-				player.spawnPoint = [x1b,y2b,player.g];
-				level[x1b][y2b] = 4;
-			} else if (getBlockType(x2b,y2b) == 3) {
-				player.spawnPoint = [x2b,y2b,player.g];
-				level[x2b][y2b] = 4;
+			if (level[player.spawnPoint[0]] != undefined) {
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
 			}
+			let coord = getCoord(3);
+			player.spawnPoint = [coord[0],coord[1],player.g];
+			level[coord[0]][coord[1]] = 4;
 			drawLevel();
 		}
 		// anti-grav
