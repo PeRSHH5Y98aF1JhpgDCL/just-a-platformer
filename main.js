@@ -31,8 +31,8 @@ var level = [
 	[1,1,1,1,1,1,1,1,1]
 ];
 const hasHitbox = [1,5];
-const blockName = ["Empty Space","Solid Block","Death Block","Deactivated Check Point","Activated Check Point (Unavailable)","Bounce Block","Warp Block (Unavailable)","Gravity Up Block","Gravity Down Block"];
-const bannedBlock = [4,6];
+const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block","Gravity Up Block","Gravity Down Block"];
+const bannedeBlock = [4];
 
 id("levelLayer").addEventListener("mousedown", function(input){
 	if (input.shiftKey) {
@@ -85,14 +85,18 @@ document.addEventListener("keydown", function(input){
 			control.right = true;
 			break;
 		case "Comma":
-			player.selectedBlock[input.shiftKey?1:0]--;
-			if (player.selectedBlock[input.shiftKey?1:0] < 0) player.selectedBlock[input.shiftKey?1:0] = blockName.length-1;
-			id("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0]+": "+blockName[player.selectedBlock[input.shiftKey?1:0]];
+			while (bannedBlock.includes(player.selectedBlock[input.shiftKey?1:0])) {
+				player.selectedBlock[input.shiftKey?1:0]--;
+				if (player.selectedBlock[input.shiftKey?1:0] < 0) player.selectedBlock[input.shiftKey?1:0] = blockName.length-1;
+			}
+			id("selectedBlock"+(input.shiftKey?1:0)).innerHTML = blockName[player.selectedBlock[input.shiftKey?1:0]];
 			break;
 		case "Period":
-			player.selectedBlock[input.shiftKey?1:0]++;
-			if (player.selectedBlock[input.shiftKey?1:0] > blockName.length-1) player.selectedBlock[input.shiftKey?1:0] = 0;
-			id("selectedBlock"+(input.shiftKey?1:0)).innerHTML = player.selectedBlock[input.shiftKey?1:0]+": "+blockName[player.selectedBlock[input.shiftKey?1:0]];
+			while (bannedBlock.includes(player.selectedBlock[input.shiftKey?1:0])) {
+				player.selectedBlock[input.shiftKey?1:0]++;
+				if (player.selectedBlock[input.shiftKey?1:0] > blockName.length-1) player.selectedBlock[input.shiftKey?1:0] = 0;
+			}
+			id("selectedBlock"+(input.shiftKey?1:0)).innerHTML = blockName[player.selectedBlock[input.shiftKey?1:0]];
 			break;
 		case "Minus":
 			if (input.shiftKey) {
