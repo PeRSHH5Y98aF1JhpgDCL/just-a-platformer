@@ -32,7 +32,7 @@ var level = [
 ];
 const hasHitbox = [1,5];
 const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block","Gravity Up Block","Gravity Down Block"];
-const bannedeBlock = [4];
+const bannedBlock = [4];
 
 id("levelLayer").addEventListener("mousedown", function(input){
 	if (input.shiftKey) {
