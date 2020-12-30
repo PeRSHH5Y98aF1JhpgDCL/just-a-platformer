@@ -286,7 +286,7 @@ function nextFrame(timeStamp) {
 			   || ((getBlockType(x2b,y1b) == 5 || getBlockType(x1b,y1b) == 5)
 			       && ((!hasHitbox.includes(getBlockType(x2b,y1b)) || hasHitbox.includes(getBlockType(x2b,y1b+1)))
 				   || (!hasHitbox.includes(getBlockType(x1b,y1b)) || hasHitbox.includes(getBlockType(x1b,y1b+1))))))
-			   && player.g < 0) player.yv = -player.g*3/4;
+			   && player.g < 0) player.yv = -Math.sign(player.g)*300;
 			player.y = (y1b + 1) * blockSize;
 			if (player.g < 0 && player.yv <= 0) player.canJump = true;
 		} else if (player.g < 0 && !player.godMode) player.canJump = false;
@@ -297,7 +297,7 @@ function nextFrame(timeStamp) {
 			   || ((getBlockType(x2b,y2b) == 5 || getBlockType(x1b,y2b) == 5)
 			       && ((!hasHitbox.includes(getBlockType(x2b,y2b)) || hasHitbox.includes(getBlockType(x2b,y2b-1))) 
 				   || (!hasHitbox.includes(getBlockType(x1b,y2b)) || hasHitbox.includes(getBlockType(x1b,y2b-1))))))
-			   && player.g > 0) player.yv = -player.g*3/4;
+			   && player.g > 0) player.yv = -Math.sign(player.g)*300;
 			player.y = y2b * blockSize - playerSize;
 			if (player.g > 0 && player.yv >= 0) player.canJump = true;
 		} else if (player.g > 0 && !player.godMode) player.canJump = false;
@@ -339,7 +339,7 @@ function nextFrame(timeStamp) {
 			respawn();
 		}
 		// key input
-		if (control.up && player.canJump) player.yv = -player.g/2;
+		if (control.up && player.canJump) player.yv = -Math.sign(player.g)*200;
 		if (control.left) player.xv = -100;
 		if (control.right) player.xv = 100;
 		// draw checks
