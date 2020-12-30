@@ -85,6 +85,8 @@ document.addEventListener("keydown", function(input){
 			control.right = true;
 			break;
 		case "Comma":
+			player.selectedBlock[input.shiftKey?1:0]--;
+			if (player.selectedBlock[input.shiftKey?1:0] < 0) player.selectedBlock[input.shiftKey?1:0] = blockName.length-1;
 			while (bannedBlock.includes(player.selectedBlock[input.shiftKey?1:0])) {
 				player.selectedBlock[input.shiftKey?1:0]--;
 				if (player.selectedBlock[input.shiftKey?1:0] < 0) player.selectedBlock[input.shiftKey?1:0] = blockName.length-1;
@@ -92,6 +94,8 @@ document.addEventListener("keydown", function(input){
 			id("selectedBlock"+(input.shiftKey?1:0)).innerHTML = blockName[player.selectedBlock[input.shiftKey?1:0]];
 			break;
 		case "Period":
+			player.selectedBlock[input.shiftKey?1:0]++;
+			if (player.selectedBlock[input.shiftKey?1:0] > blockName.length-1) player.selectedBlock[input.shiftKey?1:0] = 0;
 			while (bannedBlock.includes(player.selectedBlock[input.shiftKey?1:0])) {
 				player.selectedBlock[input.shiftKey?1:0]++;
 				if (player.selectedBlock[input.shiftKey?1:0] > blockName.length-1) player.selectedBlock[input.shiftKey?1:0] = 0;
