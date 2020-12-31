@@ -33,7 +33,7 @@ var level = [
 	[1,1,1,1,1,1,1,1,1]
 ];
 const hasHitbox = [1,5];
-const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block","G-Up Field","G-Down Field","G-Normal Field","G-Low Field","G-High Field"];
+const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block","G-Up Field","G-Down Field","G-Low Field","G-Normal Field","G-High Field"];
 const bannedBlock = [4];
 
 id("levelLayer").addEventListener("mousedown", function(input){
@@ -421,10 +421,10 @@ function drawLevel() {
 					lL.fillStyle = "#8888FF88";
 					break;
 				case 8:
-					lL.fillStyle = "#88FF8888";
+					lL.fillStyle = "#FFFF8888";
 					break;
 				case 9:
-					lL.fillStyle = "#FFFF8888";
+					lL.fillStyle = "#88FF8888";
 					break;
 				case 10:
 					lL.fillStyle = "#88FFFF88";
@@ -509,18 +509,6 @@ function drawLevel() {
 					lL.stroke();
 					break;
 				case 8:
-					lL.strokeStyle = "#00880088";
-					lL.lineWidth = blockSize/25;
-					lL.strokeRect(xb+(blockSize-blockSize/5)/2,yb+blockSize-blockSize/5-blockSize/25*3,blockSize/5,blockSize/5);
-					
-					for (let i=0; i<3; i++) {
-						lL.beginPath();
-						lL.moveTo(xb+(blockSize-blockSize/5)/2+blockSize*i/10,yb+blockSize/4);
-						lL.lineTo(xb+(blockSize-blockSize/5)/2+blockSize*i/10,yb+blockSize-blockSize/5-blockSize/25*6);
-						lL.stroke();
-					}
-					break;
-				case 9:
 					lL.strokeStyle = "#88880088";
 					lL.lineWidth = blockSize/25;
 					lL.strokeRect(xb+(blockSize-blockSize/5)/2,yb+blockSize-blockSize/5-blockSize/25*3,blockSize/5,blockSize/5);
@@ -528,6 +516,18 @@ function drawLevel() {
 					for (let i=0; i<3; i++) {
 						lL.beginPath();
 						lL.moveTo(xb+(blockSize-blockSize/5)/2+blockSize*i/10,yb+blockSize-blockSize/5-blockSize/25*9);
+						lL.lineTo(xb+(blockSize-blockSize/5)/2+blockSize*i/10,yb+blockSize-blockSize/5-blockSize/25*6);
+						lL.stroke();
+					}
+					break;
+				case 9:
+					lL.strokeStyle = "#00880088";
+					lL.lineWidth = blockSize/25;
+					lL.strokeRect(xb+(blockSize-blockSize/5)/2,yb+blockSize-blockSize/5-blockSize/25*3,blockSize/5,blockSize/5);
+					
+					for (let i=0; i<3; i++) {
+						lL.beginPath();
+						lL.moveTo(xb+(blockSize-blockSize/5)/2+blockSize*i/10,yb+blockSize/4);
 						lL.lineTo(xb+(blockSize-blockSize/5)/2+blockSize*i/10,yb+blockSize-blockSize/5-blockSize/25*6);
 						lL.stroke();
 					}
