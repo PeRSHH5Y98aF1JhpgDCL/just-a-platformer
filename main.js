@@ -424,10 +424,10 @@ function drawLevel() {
 					lL.fillStyle = "#88FF8888";
 					break;
 				case 9:
-					lL.fillStyle = "#FF888888";
+					lL.fillStyle = "#FFFF8888";
 					break;
 				case 10:
-					lL.fillStyle = "#8888FF88";
+					lL.fillStyle = "#88FFFF88";
 					break;
 				default:
 					lL.fillStyle = "#00000000";
