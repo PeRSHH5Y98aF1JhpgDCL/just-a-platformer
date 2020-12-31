@@ -14,6 +14,8 @@ const player = {
 	selectedBlock: [1,0],
 };
 const control = {
+	lmb: false,
+	rmb: false,
 	up: false,
 	down: false,
 	left: false,
@@ -43,25 +45,36 @@ id("levelLayer").addEventListener("mousedown", function(input){
 	} else {
 		let xb = Math.floor(input.offsetX/blockSize);
 		let yb = Math.floor(input.offsetY/blockSize);
-		if (input.which == 1 && !bannedBlock.includes(player.selectedBlock[0])) {
+		if (input.button == 0 && !bannedBlock.includes(player.selectedBlock[0])) {
 			level[xb][yb] = player.selectedBlock[0];
-		} else if (input.which == 3 && !bannedBlock.includes(player.selectedBlock[1])) {
+			control.lmb = true;
+			drawLevel();
+		} else if (input.button == 2 && !bannedBlock.includes(player.selectedBlock[1])) {
 			level[xb][yb] = player.selectedBlock[1];
+			control.rmb = true;
+			drawLevel();
 		}
-		drawLevel();
 	}
 });
 id("levelLayer").addEventListener("mousemove", function(input){
 	if (!input.shiftKey) {
 		let xb = Math.floor(input.offsetX/blockSize);
 		let yb = Math.floor(input.offsetY/blockSize);
-		if (input.which == 1 && !bannedBlock.includes(player.selectedBlock[0])) {
+		if (control.lmb && !bannedBlock.includes(player.selectedBlock[0])) {
 			level[xb][yb] = player.selectedBlock[0];
-		} else if (input.which == 3 && !bannedBlock.includes(player.selectedBlock[1])) {
+			drawLevel();
+		} else if (control.rmb && !bannedBlock.includes(player.selectedBlock[1])) {
 			level[xb][yb] = player.selectedBlock[1];
+			drawLevel();
 		}
 	}
-	drawLevel();
+});
+id("levelLayer").addEventListener("mouseup", function(input){
+	if (input.button == 0) {
+		control.lmb = false;
+	} else if (input.button == 2) {
+		control.rmb = false;
+	}
 });
 document.addEventListener("contextmenu", function(input){input.preventDefault();});
 
@@ -343,7 +356,7 @@ function nextFrame(timeStamp) {
 			respawn();
 		}
 		// key input
-		if (control.up && player.canJump) player.yv = -Math.sign(player.g)*200;
+		if (control.up && player.canJump) player.yv = -Math.sign(player.g)*225;
 		if (control.left) player.xv = -100;
 		if (control.right) player.xv = 100;
 		// draw checks
