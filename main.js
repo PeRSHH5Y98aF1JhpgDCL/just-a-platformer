@@ -449,6 +449,9 @@ function drawLevel() {
 				case 10:
 					lL.fillStyle = "#88FFFF88";
 					break;
+				case 11:
+					lL.fillStyle = "#FF00FF";
+					break;
 				default:
 					lL.fillStyle = "#00000000";
 			}
@@ -563,6 +566,39 @@ function drawLevel() {
 						lL.lineTo(xb+(blockSize-blockSize/5)/2+blockSize*i/10,yb+blockSize-blockSize/5-blockSize/25*6);
 						lL.stroke();
 					}
+					break;
+				case 11:
+					lL.strokeStyle = "#880088";
+					lL.lineWidth = blockSize/25;
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/2,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize/2,yb+blockSize-blockSize/25*3);
+					lL.stroke();
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize/2,yb+blockSize/2);
+					lL.lineTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.stroke();
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize-blockSize/25*3,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize/2,yb+blockSize/2);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.stroke();
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/4,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize/25*3,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize/25*3,yb+blockSize/4);
+					lL.stroke();
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize-blockSize/4,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize/4);
+					lL.stroke();
+					break;
 			}
 		}
 	}
