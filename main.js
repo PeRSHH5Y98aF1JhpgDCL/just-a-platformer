@@ -303,7 +303,7 @@ function nextFrame(timeStamp) {
 				if (player.yv < player.g/10 && player.g < 0) player.yv = player.g/10;
 				player.canWalljump = true;
 				player.wallJumpDir = "right";
-			} else player.yv = player.canWalljump = false;
+			} else player.canWalljump = false;
 			player.x = (x1b + 1) * blockSize;
 		}
 		// right wall
@@ -314,7 +314,7 @@ function nextFrame(timeStamp) {
 				if (player.yv < player.g/10 && player.g < 0) player.yv = player.g/10;
 				player.canWalljump = true;
 				player.wallJumpDir = "left";
-			} else player.yv = player.canWalljump = false;
+			} else player.canWalljump = false;
 			player.x = x2b * blockSize - playerSize;
 		}
 		// ceiling
