@@ -305,7 +305,7 @@ function nextFrame(timeStamp) {
 				player.wallJumpDir = "right";
 			} else player.canWalljump = false;
 			player.x = (x1b + 1) * blockSize;
-		}
+		} else player.canWalljump = false;
 		// right wall
 		if (isTouching("right")) {
 			player.xv = 0;
@@ -316,7 +316,7 @@ function nextFrame(timeStamp) {
 				player.wallJumpDir = "left";
 			} else player.canWalljump = false;
 			player.x = x2b * blockSize - playerSize;
-		}
+		} else player.canWalljump = false;
 		// ceiling
 		if (isTouching("up")) {
 			player.yv = 0;
@@ -373,11 +373,11 @@ function nextFrame(timeStamp) {
 		// key input
 		if (control.up && player.canWalljump) {
 			if (player.wallJumpDir == "left") {
-				player.xv = -400;
+				player.xv = -200;
 				player.yv = -Math.sign(player.g)*225;
 			}
 			if (player.wallJumpDir == "right") {
-				player.xv = 400;
+				player.xv = 200;
 				player.yv = -Math.sign(player.g)*225;
 			}
 		} else if (control.up && player.canJump) player.yv = -Math.sign(player.g)*225;
