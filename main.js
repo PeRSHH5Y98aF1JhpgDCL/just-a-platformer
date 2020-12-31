@@ -513,7 +513,7 @@ function drawLevel() {
 					}
 					break;
 				case 9:
-					lL.strokeStyle = "#88000088";
+					lL.strokeStyle = "#88880088";
 					lL.lineWidth = blockSize/25;
 					lL.strokeRect(xb+(blockSize-blockSize/5)/2,yb+blockSize-blockSize/5-blockSize/25*3,blockSize/5,blockSize/5);
 					
@@ -525,7 +525,7 @@ function drawLevel() {
 					}
 					break;
 				case 10:
-					lL.strokeStyle = "#00008888";
+					lL.strokeStyle = "#00888888";
 					lL.lineWidth = blockSize/25;
 					lL.strokeRect(xb+(blockSize-blockSize/5)/2,yb+blockSize-blockSize/5-blockSize/25*3,blockSize/5,blockSize/5);
 					
