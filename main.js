@@ -503,9 +503,9 @@ function drawLevel() {
 					lL.stroke();
 					
 					lL.beginPath();
-					lL.moveTo(xb+blockSize/2-blockSize/25*6,yb+blockSize-blockSize/25*6);
+					lL.moveTo(xb+blockSize/2-blockSize/25*3,yb+blockSize-blockSize/25*6);
 					lL.lineTo(xb+blockSize/2,yb+blockSize-blockSize/25*3);
-					lL.lineTo(xb+blockSize/2+blockSize/25*6,yb+blockSize-blockSize/25*6);
+					lL.lineTo(xb+blockSize/2+blockSize/25*3,yb+blockSize-blockSize/25*6);
 					lL.stroke();
 					break;
 				case 8:
