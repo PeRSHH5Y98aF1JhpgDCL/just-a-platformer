@@ -479,26 +479,30 @@ function drawLevel() {
 				case 6:
 					lL.strokeStyle = "#88000088";
 					lL.lineWidth = blockSize/25;
-					lL.strokeRect(xb+(blockSize-blockSize/5)/2,yb+blockSize/25*3,blockSize/5,blockSize/5);
-
-					for (let i=0; i<3; i++) {
-						lL.beginPath();
-						lL.moveTo(xb+(blockSize-blockSize/5)/2+blockSize*i/10,yb+blockSize-blockSize/4);
-						lL.lineTo(xb+(blockSize-blockSize/5)/2+blockSize*i/10,yb+blockSize/5+blockSize/25*6);
-						lL.stroke();
-					}
+					lL.strokeRect(xb+(blockSize-blockSize/5)/2,yb+blockSize-blockSize/5-blockSize/25*3,blockSize/5,blockSize/5);
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/2,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize/2,yb+blockSize-blockSize/5-blockSize/25*6);
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/2-blockSize/25*6,yb+blockSize/25*6);
+					lL.moveTo(xb+blockSize/2,yb+blockSize/25*3);
+					lL.moveTo(xb+blockSize/2+blockSize/25*6,yb+blockSize/25*6);
 					break;
 				case 7:
 					lL.strokeStyle = "#00008888";
 					lL.lineWidth = blockSize/25;
-					lL.strokeRect(xb+(blockSize-blockSize/5)/2,yb+blockSize-blockSize/5-blockSize/25*3,blockSize/5,blockSize/5);
-
-					for (let i=0; i<3; i++) {
-						lL.beginPath();
-						lL.moveTo(xb+(blockSize-blockSize/5)/2+blockSize*i/10,yb+blockSize/4);
-						lL.lineTo(xb+(blockSize-blockSize/5)/2+blockSize*i/10,yb+blockSize-blockSize/5-blockSize/25*6);
-						lL.stroke();
-					}
+					lL.strokeRect(xb+(blockSize-blockSize/5)/2,yb+blockSize/25*3,blockSize/5,blockSize/5);
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/2,yb+blockSize-blockSize/25*3);
+					lL.lineTo(xb+blockSize/2,yb+blockSize/5+blockSize/25*6);
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/2-blockSize/25*6,yb+blockSize-blockSize/25*6);
+					lL.moveTo(xb+blockSize/2,yb+blockSize-blockSize/25*3);
+					lL.moveTo(xb+blockSize/2+blockSize/25*6,yb+blockSize-blockSize/25*6);
 					break;
 				case 8:
 					lL.strokeStyle = "#00880088";
