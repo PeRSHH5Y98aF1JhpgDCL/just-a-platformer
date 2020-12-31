@@ -33,7 +33,7 @@ var level = [
 	[1,1,1,1,1,1,1,1,1]
 ];
 const hasHitbox = [1,5];
-const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block","Gravity Up Block","Gravity Down Block"];
+const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block","G-Up Field","G-Down Field","G-Normal Field","G-Low Field","G-High Field"];
 const bannedBlock = [4];
 
 id("levelLayer").addEventListener("mousedown", function(input){
