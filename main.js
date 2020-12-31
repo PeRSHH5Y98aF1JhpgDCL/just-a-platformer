@@ -346,17 +346,17 @@ function nextFrame(timeStamp) {
 		}
 		// anti-grav
 		if (isTouching("any",6)) {
-			if (player.g < 0) player.g = -player.g;
+			if (player.g > 0) player.g = -player.g;
 		}
 		if (isTouching("any",7)) {
-			if (player.g > 0) player.g = -player.g;
+			if (player.g < 0) player.g = -player.g;
 		}
 		// grav magnitude
 		if (isTouching("any",8)) {
-			player.g = Math.sign(player.g)*400;
+			player.g = Math.sign(player.g)*200;
 		}
 		if (isTouching("any",9)) {
-			player.g = Math.sign(player.g)*200;
+			player.g = Math.sign(player.g)*400;
 		}
 		if (isTouching("any",10)) {
 			player.g = Math.sign(player.g)*800;
