@@ -10,6 +10,8 @@ const player = {
 	yv: 0,
 	g: 400,
 	canJump: false,
+	canWalljump: false,
+	wallJumpDir: "left",
 	godMode: false,
 	selectedBlock: [1,0],
 };
@@ -17,7 +19,6 @@ const control = {
 	lmb: false,
 	rmb: false,
 	up: false,
-	down: false,
 	left: false,
 	right: false,
 };
@@ -32,8 +33,8 @@ var level = [
 	[1,0,0,0,0,0,0,0,1],
 	[1,1,1,1,1,1,1,1,1]
 ];
-const hasHitbox = [1,5];
-const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block","G-Up Field","G-Down Field","G-Low Field","G-Medium Field","G-High Field"];
+const hasHitbox = [1,5,11];
+const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block","G-Up Field","G-Down Field","G-Low Field","G-Medium Field","G-High Field","Wall-Jump Block"];
 const bannedBlock = [4];
 
 id("levelLayer").addEventListener("mousedown", function(input){
@@ -84,10 +85,6 @@ document.addEventListener("keydown", function(input){
 		case "ArrowUp":
 		case "KeyW":
 			control.up = true;
-			break;
-		case "ArrowDown":
-		case "KeyS":
-			control.down = true;
 			break;
 		case "ArrowLeft":
 		case "KeyA":
@@ -184,10 +181,6 @@ document.addEventListener("keyup", function(input){
 		case "ArrowUp":
 		case "KeyW":
 			control.up = false;
-			break;
-		case "ArrowDown":
-		case "KeyS":
-			control.down = false;
 			break;
 		case "ArrowLeft":
 		case "KeyA":
@@ -305,11 +298,23 @@ function nextFrame(timeStamp) {
 		// left wall
 		if (isTouching("left")) {
 			player.xv = 0;
+			if (getBlockType(x1b,y1b) == 11 || getBlockType(x1b,y2b) == 11) {
+				if (player.yv > player.g/10 && player.g > 0) player.yv = player.g/10;
+				if (player.yv < player.g/10 && player.g < 0) player.yv = player.g/10;
+				player.canWalljump = true;
+				player.wallJumpDir = "right";
+			} else player.yv = player.canWalljump = false;
 			player.x = (x1b + 1) * blockSize;
 		}
 		// right wall
 		if (isTouching("right")) {
 			player.xv = 0;
+			if (getBlockType(x2b,y1b) == 11 || getBlockType(x2b,y2b) == 11) {
+				if (player.yv > player.g/10 && player.g > 0) player.yv = player.g/10;
+				if (player.yv < player.g/10 && player.g < 0) player.yv = player.g/10;
+				player.canWalljump = true;
+				player.wallJumpDir = "left";
+			} else player.yv = player.canWalljump = false;
 			player.x = x2b * blockSize - playerSize;
 		}
 		// ceiling
@@ -366,9 +371,24 @@ function nextFrame(timeStamp) {
 			respawn();
 		}
 		// key input
-		if (control.up && player.canJump) player.yv = -Math.sign(player.g)*225;
-		if (control.left) player.xv = -100;
-		if (control.right) player.xv = 100;
+		if (control.up && player.canWalljump) {
+			if (player.wallJumpDir == "left") {
+				player.xv = -400;
+				player.yv = -Math.sign(player.g)*225;
+			}
+			if (player.wallJumpDir == "right") {
+				player.xv = 400;
+				player.yv = -Math.sign(player.g)*225;
+			}
+		} else if (control.up && player.canJump) player.yv = -Math.sign(player.g)*225;
+		if (control.left && player.xv > -100) {
+			player.xv -= 100;
+			if (player.xv < -100) player.xv = -100;
+		}
+		if (control.right && player.xv < 100) {
+			player.xv += 100;
+			if (player.xv > 100) player.xv = 100;
+		}
 		// draw checks
 		if (player.x != xprev || player.y != yprev) drawPlayer();
 	}
