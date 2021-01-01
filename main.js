@@ -219,20 +219,23 @@ document.addEventListener("keydown", function(input){
 					player.startPoint = data[1];
 					if (!player.startPoint[3]) player.startPoint[3] = 1;
 					if (player.startPoint[3] == "Infinity") player.startPoint[3] = Infinity;
+					id("lvlWidth").innerHTML = level.length;
+					id("lvlHeight").innerHTML = level[0].length;
 					toStart();
 					drawLevel();
 				}
 			} else {
 				let adjustedLevel = deepCopy(level);
 				for (let x in adjustedLevel) {
-					for (let y in x){
+					for (let y in adjustedLevel[x]){
 						if (adjustedLevel[x][y] == 4) adjustedLevel[x][y] = 3;
 						if (adjustedLevel[x][y] == 19) adjustedLevel[x][y] = 17;
 						if (adjustedLevel[x][y] == 20) adjustedLevel[x][y] = 18;
 					}
 				}
-				if (player.startPoint[3] == Infinity) player.startPoint[3] = "Infinity";
-				id("exportArea").value = JSON.stringify([adjustedLevel,player.startPoint]);
+				let startData = player.startPoint
+				if (startData[3] == Infinity) startData[3] = "Infinity";
+				id("exportArea").value = JSON.stringify([adjustedLevel,startData]);
 				id("exportArea").style.display = "inline";
 				id("exportArea").select();
 				document.execCommand("copy")
