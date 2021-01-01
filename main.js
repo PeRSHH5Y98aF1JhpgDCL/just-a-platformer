@@ -375,21 +375,21 @@ function nextFrame(timeStamp) {
 		// key input
 		if (control.up && player.canWalljump) {
 			if (player.wallJumpDir == "left") {
-				player.xv = -500;
+				player.xv = -1000;
 				player.yv = -Math.sign(player.g)*225;
 			}
 			if (player.wallJumpDir == "right") {
-				player.xv = 500;
+				player.xv = 1000;
 				player.yv = -Math.sign(player.g)*225;
 			}
 		} else if (control.up && player.canJump) player.yv = -Math.sign(player.g)*225;
-		if (control.left && player.xv > -100) {
-			player.xv -= 100;
-			if (player.xv < -100) player.xv = -100;
+		if (control.left && player.xv > -200) {
+			player.xv -= 200;
+			if (player.xv < -200) player.xv = -200;
 		}
-		if (control.right && player.xv < 100) {
-			player.xv += 100;
-			if (player.xv > 100) player.xv = 100;
+		if (control.right && player.xv < 200) {
+			player.xv += 200;
+			if (player.xv > 200) player.xv = 200;
 		}
 		// draw checks
 		if (player.x != xprev || player.y != yprev) drawPlayer();
