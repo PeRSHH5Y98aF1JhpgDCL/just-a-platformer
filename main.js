@@ -3,6 +3,7 @@ var gameSpeed = 1;
 var playerSize = 20;
 var blockSize = 50;
 const player = {
+	startPoint: [4,5,350,1],
 	spawnPoint: [4,5,350,1],
 	x: 0,
 	y: 0,
@@ -36,8 +37,8 @@ var level = [
 const hasHitbox = [1,5,11];
 const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block",
 		   "G-Up Field","G-Down Field","G-Low Field","G-Medium Field","G-High Field",
-		   "Wall-Jump Block","0-Jump Field","1-Jump Field","2-Jump Field","3-Jump Field","Inf-Jump Field"];
-const bannedBlock = [4];
+		   "Wall-Jump Block","0-Jump Field","1-Jump Field","2-Jump Field","3-Jump Field","Inf-Jump Field","Start","Goal","Activated Goal (Unavailable)"];
+const bannedBlock = [4 19];
 
 id("levelLayer").addEventListener("mousedown", function(input){
 	if (input.shiftKey) {
@@ -65,9 +66,11 @@ id("levelLayer").addEventListener("mousemove", function(input){
 		let yb = Math.floor(input.offsetY/blockSize);
 		if (control.lmb && !bannedBlock.includes(player.selectedBlock[0])) {
 			level[xb][yb] = player.selectedBlock[0];
+			if (player.selectedBlock[0] == 17) player.startPoint = [xb,yb,player.g,player.maxJumps];
 			drawLevel();
 		} else if (control.rmb && !bannedBlock.includes(player.selectedBlock[1])) {
 			level[xb][yb] = player.selectedBlock[1];
+			if (player.selectedBlock[0] == 17) player.startPoint = [xb,yb,player.g,player.maxJumps];
 			drawLevel();
 		}
 	}
@@ -154,6 +157,9 @@ document.addEventListener("keydown", function(input){
 			}
 			drawLevel();
 			break;
+		case "KeyS":
+			toStart();
+			break;
 		case "KeyR":
 			respawn();
 			break;
@@ -177,12 +183,19 @@ document.addEventListener("keydown", function(input){
 				if (data) {
 					data = JSON.parse(data);
 					level = data[0];
-					player.spawnPoint = data[1];
-					respawn();
+					player.startPoint = data[1];
+					toStart();
 					drawLevel();
 				}
 			} else {
-				id("exportArea").value = JSON.stringify([level,player.spawnPoint]);
+				let adjustedLevel = level;
+				for (let x in adjustedLevel) {
+					for (let y in x){
+						if (adjustedLevel[x][y] == 4) adjustedLevel[x][y] = 3;
+						if (adjustedLevel[x][y] == 19) adjustedLevel[x][y] = 18;
+					}
+				}
+				id("exportArea").value = JSON.stringify([adjustedLevel,player.startPoint]);
 				id("exportArea").style.display = "inline";
 				id("exportArea").select();
 				document.execCommand("copy")
@@ -277,6 +290,14 @@ function getCoord(type) {
 	} else if (getBlockType(x2b,y2b) == type) {
 		return [x2b,y2b];
 	}
+}
+function toStart() {
+	player.x = player.startPoint[0] * blockSize + (blockSize - playerSize)/2;
+	player.y = player.startPoint[1] * blockSize + (blockSize - playerSize)/2;
+	player.xv = 0;
+	player.yv = 0;
+	player.g = player.startPoint[2];
+	player.maxJumps = player.startPoint[3];
 }
 function respawn() {
 	player.x = player.spawnPoint[0] * blockSize + (blockSize - playerSize)/2;
@@ -397,6 +418,11 @@ function nextFrame(timeStamp) {
 			player.maxJumps = Infinity;
 			if (player.currentJumps != player.maxJumps && player.currentJumps != player.maxJumps-1) player.currentJumps = player.maxJumps-1;
 		}
+		if (isTouching("any",18)) {
+			let coord = getCoord(18);
+			level[coord[0]][coord[1]] = 19;
+			drawLevel();
+		}
 		// death block
 		if (isTouching("any",2) && !player.godMode) respawn();
 		// key input
@@ -485,6 +511,15 @@ function drawLevel() {
 					break;
 				case 16:
 					lL.fillStyle = "#FF880088";
+					break;
+				case 17:
+					lL.fillStyle = "#FFFF0088";
+					break;
+				case 18:
+					lL.fillStyle = "#88880088";
+					break;
+				case 19:
+					lL.fillStyle = "#FFFF0088";
 					break;
 				default:
 					lL.fillStyle = "#00000000";
@@ -739,6 +774,28 @@ function drawLevel() {
 					lL.quadraticCurveTo(xb+blockSize-blockSize/25*3,yb+blockSize/25*3,xb+blockSize-blockSize/25*3,yb+blockSize/2);
 					lL.quadraticCurveTo(xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3,xb+blockSize-blockSize/2,yb+blockSize/2);
 					lL.stroke();
+				case 17:
+					lL.strokeStyle = "#88880088";
+					lL.beginPath();
+					lL.arc(xb+blockSize/2,yb+blockSize/2,blockSize/2-blockSize/25*3,0,2*Math.PI);
+					lL.stroke();
+					break;
+				case 18:
+					lL.strokeStyle = "#44440088";
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize/2);
+					lL.lineTo(xb+blockSize/2,yb+blockSize-blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize/25*3);
+					lL.stroke();
+					break;
+				case 19:
+					lL.strokeStyle = "#88880088";
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize/2);
+					lL.lineTo(xb+blockSize/2,yb+blockSize-blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize/25*3);
+					lL.stroke();
+					break;
 			}
 		}
 	}
@@ -771,6 +828,6 @@ function arraysEqual(a, b) {
 	}
 	return true;
 }
-respawn();
+toStart();
 drawLevel();
 window.requestAnimationFrame(nextFrame);
