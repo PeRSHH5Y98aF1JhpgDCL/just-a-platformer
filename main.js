@@ -51,21 +51,27 @@ id("levelLayer").addEventListener("mousedown", function(input){
 		let xb = Math.floor(input.offsetX/blockSize);
 		let yb = Math.floor(input.offsetY/blockSize);
 		if (input.button == 0 && !bannedBlock.includes(player.selectedBlock[0])) {
-			level[xb][yb] = player.selectedBlock[0];
 			if (player.selectedBlock[0] == 17) {
-				player.startPoint = [xb,yb,player.g,player.maxJumps];
-				player.spawnPoint = player.startPoint;
-				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+				if (level[player.spawnPoint[0]] != undefined) {
+					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 17) level[player.spawnPoint[0]][player.spawnPoint[1]] = 19;
+					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 20) level[player.spawnPoint[0]][player.spawnPoint[1]] = 18;
+				}
+				player.spawnPoint = [xb,yb,player.g,player.maxJumps];
 			}
+			level[xb][yb] = player.selectedBlock[0];
 			control.lmb = true;
 			drawLevel();
 		} else if (input.button == 2 && !bannedBlock.includes(player.selectedBlock[1])) {
-			level[xb][yb] = player.selectedBlock[1];
 			if (player.selectedBlock[0] == 17) {
-				player.startPoint = [xb,yb,player.g,player.maxJumps];
-				player.spawnPoint = player.startPoint;
-				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+				if (level[player.spawnPoint[0]] != undefined) {
+					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 17) level[player.spawnPoint[0]][player.spawnPoint[1]] = 19;
+					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 20) level[player.spawnPoint[0]][player.spawnPoint[1]] = 18;
+				}
+				player.spawnPoint = [xb,yb,player.g,player.maxJumps];
 			}
+			level[xb][yb] = player.selectedBlock[1];
 			control.rmb = true;
 			drawLevel();
 		}
@@ -76,20 +82,27 @@ id("levelLayer").addEventListener("mousemove", function(input){
 		let xb = Math.floor(input.offsetX/blockSize);
 		let yb = Math.floor(input.offsetY/blockSize);
 		if (control.lmb && !bannedBlock.includes(player.selectedBlock[0])) {
+			if (player.selectedBlock[0] == 17) {
+				if (level[player.spawnPoint[0]] != undefined) {
+					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 17) level[player.spawnPoint[0]][player.spawnPoint[1]] = 19;
+					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 20) level[player.spawnPoint[0]][player.spawnPoint[1]] = 18;
+				}
+				player.spawnPoint = [xb,yb,player.g,player.maxJumps];
+			}
 			level[xb][yb] = player.selectedBlock[0];
 			if (player.selectedBlock[0] == 17) {
-				player.startPoint = [xb,yb,player.g,player.maxJumps];
-				player.spawnPoint = player.startPoint;
-				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
-			}
 			drawLevel();
 		} else if (control.rmb && !bannedBlock.includes(player.selectedBlock[1])) {
-			level[xb][yb] = player.selectedBlock[1];
 			if (player.selectedBlock[0] == 17) {
-				player.startPoint = [xb,yb,player.g,player.maxJumps];
-				player.spawnPoint = player.startPoint;
-				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+				if (level[player.spawnPoint[0]] != undefined) {
+					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 17) level[player.spawnPoint[0]][player.spawnPoint[1]] = 19;
+					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 20) level[player.spawnPoint[0]][player.spawnPoint[1]] = 18;
+				}
+				player.spawnPoint = [xb,yb,player.g,player.maxJumps];
 			}
+			level[xb][yb] = player.selectedBlock[1];
 			drawLevel();
 		}
 	}
@@ -408,17 +421,6 @@ function nextFrame(timeStamp) {
 			player.y = y2b * blockSize - playerSize;
 			if (player.g > 0 && player.yv >= 0) player.currentJumps = player.maxJumps;
 		} else if (player.g > 0 && player.currentJumps == player.maxJumps) player.currentJumps = player.maxJumps - 1;
-		// checkpoint
-		if (isTouching("any",3)) {
-			if (level[player.spawnPoint[0]] != undefined) {
-				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
-				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 17) level[player.spawnPoint[0]][player.spawnPoint[1]] = 19;
-			}
-			let coord = getCoord(3);
-			player.spawnPoint = [coord[0],coord[1],player.g,player.maxJumps];
-			level[coord[0]][coord[1]] = 4;
-			drawLevel();
-		}
 		// anti-grav
 		if (isTouching("any",6)) {
 			if (player.g > 0) player.g = -player.g;
@@ -451,8 +453,26 @@ function nextFrame(timeStamp) {
 			player.maxJumps = Infinity;
 			if (player.currentJumps != player.maxJumps && player.currentJumps != player.maxJumps-1) player.currentJumps = player.maxJumps-1;
 		}
+		// checkpoint
+		if (isTouching("any",3)) {
+			if (level[player.spawnPoint[0]] != undefined) {
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 17) level[player.spawnPoint[0]][player.spawnPoint[1]] = 19;
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 20) level[player.spawnPoint[0]][player.spawnPoint[1]] = 18;
+			}
+			let coord = getCoord(3);
+			player.spawnPoint = [coord[0],coord[1],player.g,player.maxJumps];
+			level[coord[0]][coord[1]] = 4;
+			drawLevel();
+		}
 		if (isTouching("any",18)) {
+			if (level[player.spawnPoint[0]] != undefined) {
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 17) level[player.spawnPoint[0]][player.spawnPoint[1]] = 19;
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 20) level[player.spawnPoint[0]][player.spawnPoint[1]] = 18;
+			}
 			let coord = getCoord(18);
+			player.spawnPoint = [coord[0],coord[1],player.g,player.maxJumps];
 			level[coord[0]][coord[1]] = 20;
 			drawLevel();
 		}
@@ -460,6 +480,7 @@ function nextFrame(timeStamp) {
 			if (level[player.spawnPoint[0]] != undefined) {
 				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
 				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 17) level[player.spawnPoint[0]][player.spawnPoint[1]] = 19;
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 20) level[player.spawnPoint[0]][player.spawnPoint[1]] = 18;
 			}
 			let coord = getCoord(19);
 			player.spawnPoint = [coord[0],coord[1],player.g,player.maxJumps];
