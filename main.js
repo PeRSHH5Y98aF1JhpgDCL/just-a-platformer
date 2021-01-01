@@ -376,13 +376,13 @@ function nextFrame(timeStamp) {
 		if (control.up && player.canWalljump) {
 			if (player.wallJumpDir == "left") {
 				player.xv = -1000;
-				player.yv = -Math.sign(player.g)*230;
+				player.yv = -Math.sign(player.g)*250;
 			}
 			if (player.wallJumpDir == "right") {
 				player.xv = 1000;
-				player.yv = -Math.sign(player.g)*230;
+				player.yv = -Math.sign(player.g)*250;
 			}
-		} else if (control.up && player.canJump) player.yv = -Math.sign(player.g)*230;
+		} else if (control.up && player.canJump) player.yv = -Math.sign(player.g)*250;
 		if (control.left && player.xv > -200) {
 			player.xv -= 200;
 			if (player.xv < -200) player.xv = -200;
