@@ -19,7 +19,6 @@ const player = {
 const control = {
 	lmb: false,
 	rmb: false,
-	up: false,
 	left: false,
 	right: false,
 };
@@ -87,7 +86,6 @@ document.addEventListener("keydown", function(input){
 	switch(key) {
 		case "ArrowUp":
 		case "KeyW":
-			control.up = true;
 			if (player.canWalljump) {
 				if (player.wallJumpDir == "left") {
 					player.xv = -1000;
@@ -197,10 +195,6 @@ document.addEventListener("keydown", function(input){
 document.addEventListener("keyup", function(input){
 	let key = input.code;
 	switch(key) {
-		case "ArrowUp":
-		case "KeyW":
-			control.up = false;
-			break;
 		case "ArrowLeft":
 		case "KeyA":
 			control.left = false;
