@@ -217,6 +217,8 @@ document.addEventListener("keydown", function(input){
 					data = JSON.parse(data);
 					level = data[0];
 					player.startPoint = data[1];
+					if (!player.startPoint[3]) player.startPoint[3] = 1;
+					if (player.startPoint[3] == "Infinity") player.startPoint[3] = Infinity;
 					toStart();
 					drawLevel();
 				}
@@ -229,6 +231,7 @@ document.addEventListener("keydown", function(input){
 						if (adjustedLevel[x][y] == 20) adjustedLevel[x][y] = 18;
 					}
 				}
+				if (player.startPoint[3] == Infinity) player.startPoint[3] = "Infinity";
 				id("exportArea").value = JSON.stringify([adjustedLevel,player.startPoint]);
 				id("exportArea").style.display = "inline";
 				id("exportArea").select();
@@ -842,6 +845,7 @@ function drawLevel() {
 					lL.quadraticCurveTo(xb+blockSize-blockSize/25*3,yb+blockSize/25*3,xb+blockSize-blockSize/25*3,yb+blockSize/2);
 					lL.quadraticCurveTo(xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3,xb+blockSize-blockSize/2,yb+blockSize/2);
 					lL.stroke();
+					break;
 				case 17:
 					lL.strokeStyle = "#88880088";
 					lL.beginPath();
