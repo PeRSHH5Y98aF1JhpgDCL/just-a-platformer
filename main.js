@@ -481,19 +481,19 @@ function drawLevel() {
 					lL.fillStyle = "#7289DA";
 					break;
 				case 12:
-					lL.fillStyle = "#774400";
+					lL.fillStyle = "#77440088";
 					break;
-				case 12:
-					lL.fillStyle = "#995500";
+				case 13:
+					lL.fillStyle = "#99550088";
 					break;
-				case 12:
-					lL.fillStyle = "#BB6600";
+				case 14:
+					lL.fillStyle = "#BB660088";
 					break;
-				case 12:
-					lL.fillStyle = "#DD7700";
+				case 15:
+					lL.fillStyle = "#DD770088";
 					break;
-				case 12:
-					lL.fillStyle = "#FF8800";
+				case 16:
+					lL.fillStyle = "#FF880088";
 					break;
 				default:
 					lL.fillStyle = "#00000000";
@@ -725,12 +725,12 @@ function drawLevel() {
 					
 					lL.beginPath();
 					lL.moveTo(xb+blockSize/25*3,yb+blockSize/25*3);
-					lL.lineTo(xb+blockSize/25*3,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize/25*3);
 					lL.stroke();
 					
 					lL.beginPath();
 					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
-					lL.lineTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3);
 					lL.stroke();
 					break;
 				case 16:
