@@ -302,7 +302,7 @@ function nextFrame(timeStamp) {
 		// left wall
 		if (isTouching("left")) {
 			player.xv = 0;
-			if (getBlockType(x1b,y1b) == 11 || getBlockType(x1b,y2b) == 11) {
+			if ((getBlockType(x1b,y1b) == 11 || getBlockType(x1b,y2b) == 11) && control.left) {
 				if (player.yv > player.g/10 && player.g > 0) player.yv = player.g/10;
 				if (player.yv < player.g/10 && player.g < 0) player.yv = player.g/10;
 				player.canWalljump = true;
@@ -311,7 +311,7 @@ function nextFrame(timeStamp) {
 			player.x = (x1b + 1) * blockSize;
 		} else if (isTouching("right")) { // right wall
 			player.xv = 0;
-			if (getBlockType(x2b,y1b) == 11 || getBlockType(x2b,y2b) == 11) {
+			if ((getBlockType(x2b,y1b) == 11 || getBlockType(x2b,y2b) == 11) && control.right) {
 				if (player.yv > player.g/10 && player.g > 0) player.yv = player.g/10;
 				if (player.yv < player.g/10 && player.g < 0) player.yv = player.g/10;
 				player.canWalljump = true;
