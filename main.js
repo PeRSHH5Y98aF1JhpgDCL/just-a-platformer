@@ -663,7 +663,7 @@ function drawLevel() {
 				case 13:
 					lL.strokeStyle = "#55270088";
 					lL.lineWidth = blockSize/25;
-					lL.startPath();
+					lL.beginPath();
 					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
 					lL.quadraticCurveTo(xb+blockSize/2,yb-blockSize/2,xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3);
 					lL.stroke();
@@ -686,7 +686,7 @@ function drawLevel() {
 				case 14:
 					lL.strokeStyle = "#66330088";
 					lL.lineWidth = blockSize/25;
-					lL.startPath();
+					lL.beginPath();
 					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
 					lL.quadraticCurveTo(xb+blockSize/2,yb-blockSize/2,xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3);
 					lL.stroke();
@@ -711,7 +711,7 @@ function drawLevel() {
 				case 15:
 					lL.strokeStyle = "#77380088";
 					lL.lineWidth = blockSize/25;
-					lL.startPath();
+					lL.beginPath();
 					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
 					lL.quadraticCurveTo(xb+blockSize/2,yb-blockSize/2,xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3);
 					lL.stroke();
@@ -736,12 +736,12 @@ function drawLevel() {
 				case 16:
 					lL.strokeStyle = "#88440088";
 					lL.lineWidth = blockSize/25;
-					lL.startPath();
+					lL.beginPath();
 					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
 					lL.quadraticCurveTo(xb+blockSize/2,yb-blockSize/2,xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3);
 					lL.stroke();
 					
-					lL.startPath();
+					lL.beginPath();
 					lL.moveTo(xb+blockSize/2,yb+blockSize/2);
 					lL.quadraticCurveTo(xb+blockSize/25*3,yb+blockSize/25*3,xb+blockSize/25*3,yb+blockSize/2);
 					lL.quadraticCurveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3,xb+blockSize/2,yb+blockSize/2);
