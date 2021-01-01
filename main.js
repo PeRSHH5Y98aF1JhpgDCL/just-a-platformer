@@ -361,11 +361,12 @@ function respawn() {
 }
 
 var lastFrame = 0;
+var haltThreshold = 100;
 function nextFrame(timeStamp) {
 	// setup stuff
 	let dt = timeStamp - lastFrame;
 	lastFrame = timeStamp;
-	if (dt < 100) {
+	if (dt < haltThreshold) {
 		let xprev = player.x;
 		let yprev = player.y;
 		// velocity change
