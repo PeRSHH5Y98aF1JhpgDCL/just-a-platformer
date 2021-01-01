@@ -385,23 +385,23 @@ function nextFrame(timeStamp) {
 		// multi-jump
 		if (isTouching("any",12)) {
 			player.maxJumps = 0;
-			player.currentJumps = player.maxJumps;
+			if (player.currentJumps != player.maxJumps || player.currentJumps != player.maxJumps-1) player.currentJumps = player.maxJumps-1;
 		}
 		if (isTouching("any",13)) {
 			player.maxJumps = 1;
-			player.currentJumps = player.maxJumps;
+			if (player.currentJumps != player.maxJumps || player.currentJumps != player.maxJumps-1) player.currentJumps = player.maxJumps-1;
 		}
 		if (isTouching("any",14)) {
 			player.maxJumps = 2;
-			player.currentJumps = player.maxJumps;
+			if (player.currentJumps != player.maxJumps || player.currentJumps != player.maxJumps-1) player.currentJumps = player.maxJumps-1;
 		}
 		if (isTouching("any",15)) {
 			player.maxJumps = 3;
-			player.currentJumps = player.maxJumps;
+			if (player.currentJumps != player.maxJumps || player.currentJumps != player.maxJumps-1) player.currentJumps = player.maxJumps-1;
 		}
 		if (isTouching("any",16)) {
 			player.maxJumps = Infinity;
-			player.currentJumps = player.maxJumps;
+			if (player.currentJumps != player.maxJumps || player.currentJumps != player.maxJumps-1) player.currentJumps = player.maxJumps-1;
 		}
 		// death block
 		if (isTouching("any",2) && !player.godMode) respawn();
