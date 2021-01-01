@@ -3,7 +3,7 @@ var gameSpeed = 1;
 var playerSize = 20;
 var blockSize = 50;
 const player = {
-	spawnPoint: [4,5,400,1],
+	spawnPoint: [4,5,350,1],
 	x: 0,
 	y: 0,
 	xv: 0,
