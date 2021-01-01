@@ -3,7 +3,7 @@ var gameSpeed = 1;
 var playerSize = 20;
 var blockSize = 50;
 const player = {
-	spawnPoint: [4,5,400],
+	spawnPoint: [4,5,400,1],
 	x: 0,
 	y: 0,
 	xv: 0,
@@ -290,6 +290,7 @@ function respawn() {
 	player.xv = 0;
 	player.yv = 0;
 	player.g = player.spawnPoint[2];
+	player.maxJumps = player.spawnPoint[3];
 }
 
 var lastFrame = 0;
@@ -366,7 +367,7 @@ function nextFrame(timeStamp) {
 				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
 			}
 			let coord = getCoord(3);
-			player.spawnPoint = [coord[0],coord[1],player.g];
+			player.spawnPoint = [coord[0],coord[1],player.g,player.maxJumps];
 			level[coord[0]][coord[1]] = 4;
 			drawLevel();
 		}
@@ -386,6 +387,22 @@ function nextFrame(timeStamp) {
 		}
 		if (isTouching("any",10)) {
 			player.g = Math.sign(player.g)*650;
+		}
+		// multi-jump
+		if (isTouching("any",12)) {
+			player.maxJumps = 0;
+		}
+		if (isTouching("any",13)) {
+			player.maxJumps = 1;
+		}
+		if (isTouching("any",14)) {
+			player.maxJumps = 2;
+		}
+		if (isTouching("any",15)) {
+			player.maxJumps = 3;
+		}
+		if (isTouching("any",16)) {
+			player.maxJumps = Infinity;
 		}
 		// death block
 		if (isTouching("any",2) && !player.godMode) {
@@ -462,6 +479,21 @@ function drawLevel() {
 					break;
 				case 11:
 					lL.fillStyle = "#7289DA";
+					break;
+				case 12:
+					lL.fillStyle = "#774400";
+					break;
+				case 12:
+					lL.fillStyle = "#995500";
+					break;
+				case 12:
+					lL.fillStyle = "#BB6600";
+					break;
+				case 12:
+					lL.fillStyle = "#DD7700";
+					break;
+				case 12:
+					lL.fillStyle = "#FF8800";
 					break;
 				default:
 					lL.fillStyle = "#00000000";
@@ -610,6 +642,111 @@ function drawLevel() {
 					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize/4);
 					lL.stroke();
 					break;
+				case 12:
+					lL.strokeStyle = "#44220088";
+					lL.lineWidth = blockSize/25;
+					lL.startPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.quadraticCurveTo(xb+blockSize/2,yb-blockSize/2,xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.stroke();
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.stroke();
+
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize/25*3);
+					lL.stroke();
+					break;
+				case 13:
+					lL.strokeStyle = "#55270088";
+					lL.lineWidth = blockSize/25;
+					lL.startPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.quadraticCurveTo(xb+blockSize/2,yb-blockSize/2,xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.stroke();
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/2,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize/2,yb+blockSize-blockSize/25*3);
+					lL.stroke();
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/3,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize/3*2,yb+blockSize/25*3);
+					lL.stroke();
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/3,yb+blockSize-blockSize/25*3);
+					lL.lineTo(xb+blockSize/3*2,yb+blockSize-blockSize/25*3);
+					lL.stroke();
+					break;
+				case 14:
+					lL.strokeStyle = "#66330088";
+					lL.lineWidth = blockSize/25;
+					lL.startPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.quadraticCurveTo(xb+blockSize/2,yb-blockSize/2,xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.stroke();
+					
+					for (let i = 1; i < 3; i++) {
+						lL.beginPath();
+						lL.moveTo(xb+blockSize/3*i,yb+blockSize/25*3);
+						lL.lineTo(xb+blockSize/3*i,yb+blockSize-blockSize/25*3);
+						lL.stroke();
+					}
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/6,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize/6*5,yb+blockSize/25*3);
+					lL.stroke();
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/6,yb+blockSize-blockSize/25*3);
+					lL.lineTo(xb+blockSize/6*5,yb+blockSize-blockSize/25*3);
+					lL.stroke();
+					break;
+				case 15:
+					lL.strokeStyle = "#77380088";
+					lL.lineWidth = blockSize/25;
+					lL.startPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.quadraticCurveTo(xb+blockSize/2,yb-blockSize/2,xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.stroke();
+					
+					for (let i = 1; i < 4; i++) {
+						lL.beginPath();
+						lL.moveTo(xb+blockSize/4*i,yb+blockSize/25*3);
+						lL.lineTo(xb+blockSize/4*i,yb+blockSize-blockSize/25*3);
+						lL.stroke();
+					}
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize/25*3,yb+blockSize/25*3);
+					lL.stroke();
+					
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.lineTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.stroke();
+					break;
+				case 16:
+					lL.strokeStyle = "#88440088";
+					lL.lineWidth = blockSize/25;
+					lL.startPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.quadraticCurveTo(xb+blockSize/2,yb-blockSize/2,xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3);
+					lL.stroke();
+					
+					lL.startPath();
+					lL.moveTo(xb+blockSize/2,yb+blockSize/2);
+					lL.quadraticCurveTo(xb+blockSize/25*3,yb+blockSize/25*3,xb+blockSize/25*3,yb+blockSize/2);
+					lL.quadraticCurveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3,xb+blockSize/2,yb+blockSize/2);
+					lL.quadraticCurveTo(xb+blockSize-blockSize/25*3,yb+blockSize/25*3,xb+blockSize-blockSize/25*3,yb+blockSize/2);
+					lL.quadraticCurveTo(xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3,xb+blockSize-blockSize/2,yb+blockSize/2);
 			}
 		}
 	}
