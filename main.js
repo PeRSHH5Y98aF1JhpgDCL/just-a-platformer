@@ -64,7 +64,7 @@ id("levelLayer").addEventListener("mousedown", function(input){
 			control.lmb = true;
 			drawLevel();
 		} else if (input.button == 2 && !bannedBlock.includes(player.selectedBlock[1])) {
-			if (player.selectedBlock[0] == 17) {
+			if (player.selectedBlock[1] == 17) {
 				if (level[player.spawnPoint[0]] != undefined) {
 					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
 					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 17) level[player.spawnPoint[0]][player.spawnPoint[1]] = 19;
@@ -361,7 +361,7 @@ function respawn() {
 }
 
 var lastFrame = 0;
-var haltThreshold = 100;
+var haltThreshold = 50;
 function nextFrame(timeStamp) {
 	// setup stuff
 	let dt = timeStamp - lastFrame;
