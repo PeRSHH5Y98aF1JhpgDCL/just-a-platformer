@@ -645,7 +645,7 @@ function drawLevel() {
 				case 12:
 					lL.strokeStyle = "#44220088";
 					lL.lineWidth = blockSize/25;
-					lL.startPath();
+					lL.beginPath();
 					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/25*3);
 					lL.quadraticCurveTo(xb+blockSize/2,yb-blockSize/2,xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/25*3);
 					lL.stroke();
