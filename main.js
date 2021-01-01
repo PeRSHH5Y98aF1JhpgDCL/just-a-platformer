@@ -37,8 +37,9 @@ var level = [
 const hasHitbox = [1,5,11];
 const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block",
 		   "G-Up Field","G-Down Field","G-Low Field","G-Medium Field","G-High Field",
-		   "Wall-Jump Block","0-Jump Field","1-Jump Field","2-Jump Field","3-Jump Field","Inf-Jump Field","Start","Goal","Activated Goal (Unavailable)"];
-const bannedBlock = [4,19];
+		   "Wall-Jump Block","0-Jump Field","1-Jump Field","2-Jump Field","3-Jump Field","Inf-Jump Field",
+		   "Start","Goal","Deactivated Start (Unavailable)","Activated Goal (Unavailable)"];
+const bannedBlock = [4,19,20];
 
 id("levelLayer").addEventListener("mousedown", function(input){
 	if (input.shiftKey) {
@@ -51,10 +52,20 @@ id("levelLayer").addEventListener("mousedown", function(input){
 		let yb = Math.floor(input.offsetY/blockSize);
 		if (input.button == 0 && !bannedBlock.includes(player.selectedBlock[0])) {
 			level[xb][yb] = player.selectedBlock[0];
+			if (player.selectedBlock[0] == 17) {
+				player.startPoint = [xb,yb,player.g,player.maxJumps];
+				player.spawnPoint = player.startPoint;
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+			}
 			control.lmb = true;
 			drawLevel();
 		} else if (input.button == 2 && !bannedBlock.includes(player.selectedBlock[1])) {
 			level[xb][yb] = player.selectedBlock[1];
+			if (player.selectedBlock[0] == 17) {
+				player.startPoint = [xb,yb,player.g,player.maxJumps];
+				player.spawnPoint = player.startPoint;
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+			}
 			control.rmb = true;
 			drawLevel();
 		}
@@ -66,11 +77,19 @@ id("levelLayer").addEventListener("mousemove", function(input){
 		let yb = Math.floor(input.offsetY/blockSize);
 		if (control.lmb && !bannedBlock.includes(player.selectedBlock[0])) {
 			level[xb][yb] = player.selectedBlock[0];
-			if (player.selectedBlock[0] == 17) player.startPoint = [xb,yb,player.g,player.maxJumps];
+			if (player.selectedBlock[0] == 17) {
+				player.startPoint = [xb,yb,player.g,player.maxJumps];
+				player.spawnPoint = player.startPoint;
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+			}
 			drawLevel();
 		} else if (control.rmb && !bannedBlock.includes(player.selectedBlock[1])) {
 			level[xb][yb] = player.selectedBlock[1];
-			if (player.selectedBlock[0] == 17) player.startPoint = [xb,yb,player.g,player.maxJumps];
+			if (player.selectedBlock[0] == 17) {
+				player.startPoint = [xb,yb,player.g,player.maxJumps];
+				player.spawnPoint = player.startPoint;
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+			}
 			drawLevel();
 		}
 	}
@@ -188,11 +207,12 @@ document.addEventListener("keydown", function(input){
 					drawLevel();
 				}
 			} else {
-				let adjustedLevel = level;
+				let adjustedLevel = deepCopy(level);
 				for (let x in adjustedLevel) {
 					for (let y in x){
 						if (adjustedLevel[x][y] == 4) adjustedLevel[x][y] = 3;
-						if (adjustedLevel[x][y] == 19) adjustedLevel[x][y] = 18;
+						if (adjustedLevel[x][y] == 19) adjustedLevel[x][y] = 17;
+						if (adjustedLevel[x][y] == 20) adjustedLevel[x][y] = 18;
 					}
 				}
 				id("exportArea").value = JSON.stringify([adjustedLevel,player.startPoint]);
@@ -219,6 +239,18 @@ document.addEventListener("keyup", function(input){
 	}
 });
 
+function deepCopy(inObject) { //definitely not copied from somewhere else
+	let outObject, value, key
+	if (typeof inObject !== "object" || inObject === null) {
+		return inObject
+	}
+	outObject = Array.isArray(inObject) ? [] : {}
+	for (key in inObject) {
+		value = inObject[key]
+		outObject[key] = deepCopy(value)
+	}
+	return outObject
+}
 function getBlockType(x,y) {
 	if (x < 0 || x >= level.length || y < 0 || y >= level[0].length) {
 		return 1;
@@ -380,6 +412,7 @@ function nextFrame(timeStamp) {
 		if (isTouching("any",3)) {
 			if (level[player.spawnPoint[0]] != undefined) {
 				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 17) level[player.spawnPoint[0]][player.spawnPoint[1]] = 19;
 			}
 			let coord = getCoord(3);
 			player.spawnPoint = [coord[0],coord[1],player.g,player.maxJumps];
@@ -420,7 +453,17 @@ function nextFrame(timeStamp) {
 		}
 		if (isTouching("any",18)) {
 			let coord = getCoord(18);
-			level[coord[0]][coord[1]] = 19;
+			level[coord[0]][coord[1]] = 20;
+			drawLevel();
+		}
+		if (isTouching("any",19)) {
+			if (level[player.spawnPoint[0]] != undefined) {
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 4) level[player.spawnPoint[0]][player.spawnPoint[1]] = 3;
+				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 17) level[player.spawnPoint[0]][player.spawnPoint[1]] = 19;
+			}
+			let coord = getCoord(19);
+			player.spawnPoint = [coord[0],coord[1],player.g,player.maxJumps];
+			level[coord[0]][coord[1]] = 17;
 			drawLevel();
 		}
 		// death block
@@ -519,6 +562,9 @@ function drawLevel() {
 					lL.fillStyle = "#88880088";
 					break;
 				case 19:
+					lL.fillStyle = "#88880088";
+					break;
+				case 20:
 					lL.fillStyle = "#FFFF0088";
 					break;
 				default:
@@ -789,6 +835,12 @@ function drawLevel() {
 					lL.stroke();
 					break;
 				case 19:
+					lL.strokeStyle = "#44440088";
+					lL.beginPath();
+					lL.arc(xb+blockSize/2,yb+blockSize/2,blockSize/2-blockSize/25*3,0,2*Math.PI);
+					lL.stroke();
+					break;
+				case 20:
 					lL.strokeStyle = "#88880088";
 					lL.beginPath();
 					lL.moveTo(xb+blockSize/25*3,yb+blockSize/2);
