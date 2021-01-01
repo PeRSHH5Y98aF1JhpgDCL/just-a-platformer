@@ -9,9 +9,10 @@ const player = {
 	xv: 0,
 	yv: 0,
 	g: 400,
-	canJump: false,
+	currentJumps: 0,
 	canWalljump: false,
 	wallJumpDir: "left",
+	maxJumps: 1,
 	godMode: false,
 	selectedBlock: [1,0],
 };
@@ -34,7 +35,9 @@ var level = [
 	[1,1,1,1,1,1,1,1,1]
 ];
 const hasHitbox = [1,5,11];
-const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block","G-Up Field","G-Down Field","G-Low Field","G-Medium Field","G-High Field","Wall-Jump Block"];
+const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block",
+		   "G-Up Field","G-Down Field","G-Low Field","G-Medium Field","G-High Field",
+		   "Wall-Jump Block","0-Jump Field","1-Jump Field","2-Jump Field","3-Jump Field","Inf-Jump Field"];
 const bannedBlock = [4];
 
 id("levelLayer").addEventListener("mousedown", function(input){
@@ -85,6 +88,19 @@ document.addEventListener("keydown", function(input){
 		case "ArrowUp":
 		case "KeyW":
 			control.up = true;
+			if (player.canWalljump) {
+				if (player.wallJumpDir == "left") {
+					player.xv = -1000;
+					player.yv = -Math.sign(player.g)*225;
+				}
+				if (player.wallJumpDir == "right") {
+					player.xv = 1000;
+					player.yv = -Math.sign(player.g)*225;
+				}
+			} else if (player.currentJumps > 0 || player.godMode) {
+				player.yv = -Math.sign(player.g)*225;
+				player.currentJumps--;
+			}
 			break;
 		case "ArrowLeft":
 		case "KeyA":
@@ -331,8 +347,8 @@ function nextFrame(timeStamp) {
 				   || (!hasHitbox.includes(getBlockType(x1b,y1b)) || hasHitbox.includes(getBlockType(x1b,y1b+1))))))
 			   && player.g < 0) player.yv = -Math.sign(player.g)*300;
 			player.y = (y1b + 1) * blockSize;
-			if (player.g < 0 && player.yv <= 0) player.canJump = true;
-		} else if (player.g < 0 && !player.godMode) player.canJump = false;
+			if (player.g < 0 && player.yv <= 0) player.currentJumps = player.maxJumps;
+		} else if (player.g < 0 && player.currentJumps == player.maxJumps) player.currentJumps = player.maxJumps - 1;
 		// floor
 		if (isTouching("down")) {
 			player.yv = 0;
@@ -342,8 +358,8 @@ function nextFrame(timeStamp) {
 				   || (!hasHitbox.includes(getBlockType(x1b,y2b)) || hasHitbox.includes(getBlockType(x1b,y2b-1))))))
 			   && player.g > 0) player.yv = -Math.sign(player.g)*300;
 			player.y = y2b * blockSize - playerSize;
-			if (player.g > 0 && player.yv >= 0) player.canJump = true;
-		} else if (player.g > 0 && !player.godMode) player.canJump = false;
+			if (player.g > 0 && player.yv >= 0) player.currentJumps = player.maxJumps;
+		} else if (player.g > 0 && player.currentJumps == player.maxJumps) player.currentJumps = player.maxJumps - 1;
 		// checkpoint
 		if (isTouching("any",3)) {
 			if (level[player.spawnPoint[0]] != undefined) {
@@ -376,16 +392,6 @@ function nextFrame(timeStamp) {
 			respawn();
 		}
 		// key input
-		if (control.up && player.canWalljump) {
-			if (player.wallJumpDir == "left") {
-				player.xv = -1000;
-				player.yv = -Math.sign(player.g)*225;
-			}
-			if (player.wallJumpDir == "right") {
-				player.xv = 1000;
-				player.yv = -Math.sign(player.g)*225;
-			}
-		} else if (control.up && player.canJump) player.yv = -Math.sign(player.g)*225;
 		if (control.left && player.xv > -200) {
 			player.xv -= 200;
 			if (player.xv < -200) player.xv = -200;
