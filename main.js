@@ -309,9 +309,7 @@ function nextFrame(timeStamp) {
 				player.wallJumpDir = "right";
 			} else player.canWalljump = false;
 			player.x = (x1b + 1) * blockSize;
-		} else player.canWalljump = false;
-		// right wall
-		if (isTouching("right")) {
+		} else if (isTouching("right")) { // right wall
 			player.xv = 0;
 			if (getBlockType(x2b,y1b) == 11 || getBlockType(x2b,y2b) == 11) {
 				if (player.yv > player.g/10 && player.g > 0) player.yv = player.g/10;
