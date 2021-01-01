@@ -140,6 +140,9 @@ document.addEventListener("keydown", function(input){
 			}
 			drawLevel();
 			break;
+		case "KeyR":
+			respawn();
+			break;
 		case "KeyG":
 			player.godMode = !player.godMode;
 			drawPlayer();
