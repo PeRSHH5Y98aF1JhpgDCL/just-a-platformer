@@ -379,35 +379,32 @@ function nextFrame(timeStamp) {
 			if (player.g < 0) player.g = -player.g;
 		}
 		// grav magnitude
-		if (isTouching("any",8)) {
-			player.g = Math.sign(player.g)*195;
-		}
-		if (isTouching("any",9)) {
-			player.g = Math.sign(player.g)*350;
-		}
-		if (isTouching("any",10)) {
-			player.g = Math.sign(player.g)*650;
-		}
+		if (isTouching("any",8)) player.g = Math.sign(player.g)*195;
+		if (isTouching("any",9)) player.g = Math.sign(player.g)*350;
+		if (isTouching("any",10)) player.g = Math.sign(player.g)*650;
 		// multi-jump
 		if (isTouching("any",12)) {
 			player.maxJumps = 0;
+			player.currentJumps = player.maxJumps;
 		}
 		if (isTouching("any",13)) {
 			player.maxJumps = 1;
+			player.currentJumps = player.maxJumps;
 		}
 		if (isTouching("any",14)) {
 			player.maxJumps = 2;
+			player.currentJumps = player.maxJumps;
 		}
 		if (isTouching("any",15)) {
 			player.maxJumps = 3;
+			player.currentJumps = player.maxJumps;
 		}
 		if (isTouching("any",16)) {
 			player.maxJumps = Infinity;
+			player.currentJumps = player.maxJumps;
 		}
 		// death block
-		if (isTouching("any",2) && !player.godMode) {
-			respawn();
-		}
+		if (isTouching("any",2) && !player.godMode) respawn();
 		// key input
 		if (control.left && player.xv > -200) {
 			player.xv -= 200;
