@@ -57,6 +57,7 @@ id("levelLayer").addEventListener("mousedown", function(input){
 					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 17) level[player.spawnPoint[0]][player.spawnPoint[1]] = 19;
 					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 20) level[player.spawnPoint[0]][player.spawnPoint[1]] = 18;
 				}
+				player.startPoint = [xb,yb,player.g,player.maxJumps];
 				player.spawnPoint = [xb,yb,player.g,player.maxJumps];
 			}
 			level[xb][yb] = player.selectedBlock[0];
@@ -69,6 +70,7 @@ id("levelLayer").addEventListener("mousedown", function(input){
 					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 17) level[player.spawnPoint[0]][player.spawnPoint[1]] = 19;
 					if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 20) level[player.spawnPoint[0]][player.spawnPoint[1]] = 18;
 				}
+				player.startPoint = [xb,yb,player.g,player.maxJumps];
 				player.spawnPoint = [xb,yb,player.g,player.maxJumps];
 			}
 			level[xb][yb] = player.selectedBlock[1];
