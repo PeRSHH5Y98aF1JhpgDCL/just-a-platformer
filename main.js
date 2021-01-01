@@ -375,11 +375,11 @@ function nextFrame(timeStamp) {
 		// key input
 		if (control.up && player.canWalljump) {
 			if (player.wallJumpDir == "left") {
-				player.xv = -800;
+				player.xv = -500;
 				player.yv = -Math.sign(player.g)*225;
 			}
 			if (player.wallJumpDir == "right") {
-				player.xv = 800;
+				player.xv = 500;
 				player.yv = -Math.sign(player.g)*225;
 			}
 		} else if (control.up && player.canJump) player.yv = -Math.sign(player.g)*225;
