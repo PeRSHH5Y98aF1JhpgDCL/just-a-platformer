@@ -91,7 +91,6 @@ id("levelLayer").addEventListener("mousemove", function(input){
 				player.spawnPoint = [xb,yb,player.g,player.maxJumps];
 			}
 			level[xb][yb] = player.selectedBlock[0];
-			if (player.selectedBlock[0] == 17) {
 			drawLevel();
 		} else if (control.rmb && !bannedBlock.includes(player.selectedBlock[1])) {
 			if (player.selectedBlock[0] == 17) {
