@@ -232,9 +232,7 @@ document.addEventListener("keydown", function(input){
 					player.startPoint = data[1];
 					if (!player.startPoint[3]) player.startPoint[3] = 1;
 					if (player.startPoint[3] == "Infinity") player.startPoint[3] = Infinity;
-					player.checkPoint = data[1];
-					if (!player.checkPoint[3]) player.checkPoint[3] = 1;
-					if (player.checkPoint[3] == "Infinity") player.checkPoint[3] = Infinity;
+					player.checkPoint = player.startPoint;
 					id("lvlWidth").innerHTML = level.length;
 					id("lvlHeight").innerHTML = level[0].length;
 					toStart();
