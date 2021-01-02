@@ -3,8 +3,8 @@ var gameSpeed = 1;
 var playerSize = 20;
 var blockSize = 50;
 const player = {
-	startPoint: [4,5,350,1],
-	spawnPoint: [4,5,350,1],
+	startPoint: [4,5,350,1,200],
+	spawnPoint: [4,5,350,1,200],
 	x: 0,
 	y: 0,
 	xv: 0,
@@ -234,6 +234,7 @@ document.addEventListener("keydown", function(input){
 					player.startPoint = data[1];
 					if (!player.startPoint[3]) player.startPoint[3] = 1;
 					if (player.startPoint[3] == "Infinity") player.startPoint[3] = Infinity;
+					if (!player.startPoint[4]) player.startPoint[4] = 200;
 					player.checkPoint = player.startPoint;
 					id("lvlWidth").innerHTML = level.length;
 					id("lvlHeight").innerHTML = level[0].length;
@@ -485,7 +486,7 @@ function nextFrame(timeStamp) {
 				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 20) level[player.spawnPoint[0]][player.spawnPoint[1]] = 18;
 			}
 			let coord = getCoord(3);
-			player.spawnPoint = [coord[0],coord[1],player.g,player.maxJumps];
+			player.spawnPoint = [coord[0],coord[1],player.g,player.maxJumps,player.moveSpeed];
 			level[coord[0]][coord[1]] = 4;
 			drawLevel();
 		}
@@ -496,7 +497,7 @@ function nextFrame(timeStamp) {
 				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 20) level[player.spawnPoint[0]][player.spawnPoint[1]] = 18;
 			}
 			let coord = getCoord(18);
-			player.spawnPoint = [coord[0],coord[1],player.g,player.maxJumps];
+			player.spawnPoint = [coord[0],coord[1],player.g,player.maxJumps,player.moveSpeed];
 			level[coord[0]][coord[1]] = 20;
 			drawLevel();
 		}
@@ -507,7 +508,7 @@ function nextFrame(timeStamp) {
 				if (level[player.spawnPoint[0]][player.spawnPoint[1]] == 20) level[player.spawnPoint[0]][player.spawnPoint[1]] = 18;
 			}
 			let coord = getCoord(19);
-			player.spawnPoint = [coord[0],coord[1],player.g,player.maxJumps];
+			player.spawnPoint = [coord[0],coord[1],player.g,player.maxJumps,player.moveSpeed];
 			level[coord[0]][coord[1]] = 17;
 			drawLevel();
 		}
