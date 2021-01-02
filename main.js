@@ -367,6 +367,7 @@ function toStart() {
 	player.yv = 0;
 	player.g = player.startPoint[2];
 	player.maxJumps = player.startPoint[3];
+	player.moveSpeed = player.startPoint[4];
 }
 function respawn() {
 	player.x = player.spawnPoint[0] * blockSize + (blockSize - playerSize)/2;
@@ -375,6 +376,7 @@ function respawn() {
 	player.yv = 0;
 	player.g = player.spawnPoint[2];
 	player.maxJumps = player.spawnPoint[3];
+	player.moveSpeed = player.spawnPoint[4];
 }
 
 var lastFrame = 0;
