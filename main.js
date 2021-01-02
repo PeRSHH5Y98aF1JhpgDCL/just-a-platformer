@@ -136,12 +136,12 @@ document.addEventListener("keydown", function(input){
 	let key = input.code;
 	switch(key) {
 		case "ArrowUp":
-			if (input.shiftKey) {
+			if (input.ctrlKey) {
 				if (level[0].length > 1) {
 					for (let i in level) level[i].shift();
 					id("lvlHeight").innerHTML = level[0].length;
 				}
-			} else {
+			} else if (input.shiftKey) {
 				for (let i in level) {
 					level[i].unshift(0);
 				}
@@ -163,12 +163,12 @@ document.addEventListener("keydown", function(input){
 			}
 			break;
 		case "ArrowDown":
-			if (input.shiftKey) {
+			if (input.ctrlKey) {
 				if (level[0].length > 1) {
 					for (let i in level) level[i].pop();
 					id("lvlHeight").innerHTML = level[0].length;
 				}
-			} else {
+			} else if (input.shiftKey) {
 				for (let i in level) {
 					level[i].push(0);
 				}
@@ -177,12 +177,12 @@ document.addEventListener("keydown", function(input){
 			drawLevel();
 			break;
 		case "ArrowLeft":
-			if (input.shiftKey) {
+			if (input.ctrlKey) {
 				if (level.length > 1) {
 					level.pop();
 					id("lvlWidth").innerHTML = level.length;
 				}
-			} else {
+			} else if (input.shiftKey) {
 				level.push([]);
 				level[level.length-1].length = level[0].length;
 				level[level.length-1].fill(0);
@@ -193,12 +193,12 @@ document.addEventListener("keydown", function(input){
 			control.left = true;
 			break;
 		case "ArrowRight":
-			if (input.shiftKey) {
+			if (input.ctrlKey) {
 				if (level.length > 1) {
 					level.shift();
 					id("lvlWidth").innerHTML = level.length;
 				}
-			} else {
+			} else if (input.shiftKey) {
 				level.unshift([]);
 				level[0].length = level[1].length;
 				level[0].fill(0);
