@@ -136,6 +136,17 @@ document.addEventListener("keydown", function(input){
 	let key = input.code;
 	switch(key) {
 		case "ArrowUp":
+			if (input.shiftKey) {
+				if (level[0].length > 1) {
+					for (let i in level) level[i].shift();
+					id("lvlHeight").innerHTML = level[0].length;
+				}
+			} else {
+				for (let i in level) {
+					level[i].unshift(0);
+				}
+				id("lvlHeight").innerHTML = level[0].length;
+			}
 		case "KeyW":
 			if (player.canWalljump) {
 				if (player.wallJumpDir == "left") {
@@ -151,11 +162,49 @@ document.addEventListener("keydown", function(input){
 				player.currentJumps--;
 			}
 			break;
+		case "ArrowDown":
+			if (input.shiftKey) {
+				if (level[0].length > 1) {
+					for (let i in level) level[i].pop();
+					id("lvlHeight").innerHTML = level[0].length;
+				}
+			} else {
+				for (let i in level) {
+					level[i].push(0);
+				}
+				id("lvlHeight").innerHTML = level[0].length;
+			}
+			drawLevel();
+			break;
 		case "ArrowLeft":
+			if (input.shiftKey) {
+				if (level.length > 1) {
+					level.pop();
+					id("lvlWidth").innerHTML = level.length;
+				}
+			} else {
+				level.push([]);
+				level[level.length-1].length = level[0].length;
+				level[level.length-1].fill(0);
+				id("lvlWidth").innerHTML = level.length;
+			}
+			drawLevel();
 		case "KeyA":
 			control.left = true;
 			break;
 		case "ArrowRight":
+			if (input.shiftKey) {
+				if (level.length > 1) {
+					level.shift();
+					id("lvlWidth").innerHTML = level.length;
+				}
+			} else {
+				level.unshift([]);
+				level[0].length = level[1].length;
+				level[0].fill(0);
+				id("lvlWidth").innerHTML = level.length;
+			}
+			drawLevel();
 		case "KeyD":
 			control.right = true;
 			break;
@@ -177,33 +226,7 @@ document.addEventListener("keydown", function(input){
 			}
 			id("selectedBlock"+(input.shiftKey?1:0)).innerHTML = blockName[player.selectedBlock[input.shiftKey?1:0]];
 			break;
-		case "Minus":
-			if (input.shiftKey) {
-				if (level[0].length > 1) {
-					for (let i in level) level[i].length--;
-					id("lvlHeight").innerHTML = level[0].length;
-				}
-			} else {
-				if (level.length > 1) {
-					level.length--;
-					id("lvlWidth").innerHTML = level.length;
-				}
-			}
-			drawLevel();
-			break;
 		case "Equal":
-			if (input.shiftKey) {
-				for (let i in level) {
-					level[i].push(0);
-				}
-				id("lvlHeight").innerHTML = level[0].length;
-			} else {
-				level.push([]);
-				level[level.length-1].length = level[0].length;
-				level[level.length-1].fill(0);
-				id("lvlWidth").innerHTML = level.length;
-			}
-			drawLevel();
 			break;
 		case "KeyS":
 			toStart();
