@@ -42,14 +42,21 @@ const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Acti
 const bannedBlock = [4,19,20];
 
 id("levelLayer").addEventListener("mousedown", function(input){
+	let xb = Math.floor(input.offsetX/blockSize);
+	let yb = Math.floor(input.offsetY/blockSize);
 	if (input.shiftKey) {
 		player.x = input.offsetX;
 		player.y = input.offsetY;
 		player.xv = 0;
 		player.yv = 0;
+		if (input.button == 1) {
+			player.selectedBlock[1] = getBlockType(xb,yb);
+			if (player.selectedBlock[1] == 4) player.selectedBlock[1] = 3;
+			if (player.selectedBlock[1] == 19) player.selectedBlock[1] = 17;
+			if (player.selectedBlock[1] == 20) player.selectedBlock[1] = 18;
+			id("selectedBlock"+(input.shiftKey?1:0)).innerHTML = blockName[player.selectedBlock[input.shiftKey?1:0]];
+		}
 	} else {
-		let xb = Math.floor(input.offsetX/blockSize);
-		let yb = Math.floor(input.offsetY/blockSize);
 		if (input.button == 0 && !bannedBlock.includes(player.selectedBlock[0])) {
 			if (player.selectedBlock[0] == 17) {
 				if (level[player.spawnPoint[0]] != undefined) {
@@ -63,6 +70,13 @@ id("levelLayer").addEventListener("mousedown", function(input){
 			level[xb][yb] = player.selectedBlock[0];
 			control.lmb = true;
 			drawLevel();
+		} else if (input.button == 1) {
+			player.selectedBlock[0] = getBlockType(xb,yb);
+			if (player.selectedBlock[0] == 4) player.selectedBlock[0] = 3;
+			if (player.selectedBlock[0] == 19) player.selectedBlock[0] = 17;
+			if (player.selectedBlock[0] == 20) player.selectedBlock[0] = 18;
+			id("selectedBlock"+(input.shiftKey?1:0)).innerHTML = blockName[player.selectedBlock[input.shiftKey?1:0]];
+		}
 		} else if (input.button == 2 && !bannedBlock.includes(player.selectedBlock[1])) {
 			if (player.selectedBlock[1] == 17) {
 				if (level[player.spawnPoint[0]] != undefined) {
