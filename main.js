@@ -912,30 +912,33 @@ function drawLevel() {
 					break;
 				case 21:
 					lL.strokeStyle = "#00440088";
+					lL.lineWidth = blockSize/25;
 					lL.beginPath();
 					lL.moveTo(xb+blockSize/4,yb+blockSize/25*3);
 					lL.lineTo(xb+blockSize/4+blockSize/2,yb+blockSize/2);
-					lL.moveTo(xb+blockSize/4,yb+blockSize-blockSize/25*3);
+					lL.lineTo(xb+blockSize/4,yb+blockSize-blockSize/25*3);
 					lL.stroke();
 					break;
 				case 22:
 					lL.strokeStyle = "#00660088";
+					lL.lineWidth = blockSize/25;
 					for (let i = 1; i < 3; i++) {
 						lL.beginPath();
-						lL.moveTo(xb+blockSize/5*i,yb+blockSize/25*3);
-						lL.lineTo(xb+blockSize/5*i+blockSize/2,yb+blockSize/2);
-						lL.moveTo(xb+blockSize/5*i,yb+blockSize-blockSize/25*3);
+						lL.moveTo(xb+blockSize/6*i,yb+blockSize/25*3);
+						lL.lineTo(xb+blockSize/6*i+blockSize/2,yb+blockSize/2);
+						lL.lineTo(xb+blockSize/6*i,yb+blockSize-blockSize/25*3);
 						lL.stroke();
 					}
 					break;
 				case 23:
 					lL.strokeStyle = "#00880088";
+					lL.lineWidth = blockSize/25;
 					lL.beginPath();
 					for (let i = 1; i < 4; i++) {
 						lL.beginPath();
-						lL.moveTo(xb+blockSize/6*i,yb+blockSize/25*3);
-						lL.lineTo(xb+blockSize/6*i+blockSize/2,yb+blockSize/2);
-						lL.moveTo(xb+blockSize/6*i,yb+blockSize-blockSize/25*3);
+						lL.moveTo(xb+blockSize/8*i,yb+blockSize/25*3);
+						lL.lineTo(xb+blockSize/8*i+blockSize/2,yb+blockSize/2);
+						lL.lineTo(xb+blockSize/8*i,yb+blockSize-blockSize/25*3);
 						lL.stroke();
 					}
 					break;
