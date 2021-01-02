@@ -76,7 +76,6 @@ id("levelLayer").addEventListener("mousedown", function(input){
 			if (player.selectedBlock[0] == 19) player.selectedBlock[0] = 17;
 			if (player.selectedBlock[0] == 20) player.selectedBlock[0] = 18;
 			id("selectedBlock"+(input.shiftKey?1:0)).innerHTML = blockName[player.selectedBlock[input.shiftKey?1:0]];
-		}
 		} else if (input.button == 2 && !bannedBlock.includes(player.selectedBlock[1])) {
 			if (player.selectedBlock[1] == 17) {
 				if (level[player.spawnPoint[0]] != undefined) {
