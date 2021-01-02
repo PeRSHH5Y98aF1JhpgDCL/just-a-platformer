@@ -519,7 +519,10 @@ function nextFrame(timeStamp) {
 			player.xv += 200;
 			if (player.xv > 200) player.xv = 200;
 		}
-		if (player.x < -1 || player.x > level.length*blockSize || player.y < -1 || player.y > level[0].length-*blockSize)
+		if (player.x < -1 || player.x > level.length*blockSize || player.y < -1 || player.y > level[0].length-*blockSize) {
+			player.x = 0;
+			player.y = 0;
+		}
 		// draw checks
 		if (player.x != xprev || player.y != yprev) drawPlayer();
 	}
