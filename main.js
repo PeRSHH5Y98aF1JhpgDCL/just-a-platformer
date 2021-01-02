@@ -14,6 +14,7 @@ const player = {
 	canWalljump: false,
 	wallJumpDir: "left",
 	maxJumps: 1,
+	moveSpeed: 200,
 	godMode: false,
 	selectedBlock: [1,0],
 };
@@ -38,7 +39,8 @@ const hasHitbox = [1,5,11];
 const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block",
 		   "G-Up Field","G-Down Field","G-Low Field","G-Medium Field","G-High Field",
 		   "Wall-Jump Block","0-Jump Field","1-Jump Field","2-Jump Field","3-Jump Field","Inf-Jump Field",
-		   "Start (note: save your current gravity and jump amount as the starting value)","Goal","Deactivated Start (Unavailable)","Activated Goal (Unavailable)"];
+		   "Start","Goal","Deactivated Start (Unavailable)","Activated Goal (Unavailable)",
+		   "S-Slow Field","S-Normal Field","S-Fast Field"];
 const bannedBlock = [4,19,20];
 
 id("levelLayer").addEventListener("mousedown", function(input){
@@ -137,11 +139,11 @@ document.addEventListener("keydown", function(input){
 		case "KeyW":
 			if (player.canWalljump) {
 				if (player.wallJumpDir == "left") {
-					player.xv = -1000;
+					player.xv = -player.moveSpeed*5;
 					player.yv = -Math.sign(player.g)*225;
 				}
 				if (player.wallJumpDir == "right") {
-					player.xv = 1000;
+					player.xv = player.moveSpeed*5;
 					player.yv = -Math.sign(player.g)*225;
 				}
 			} else if (player.currentJumps > 0 || player.godMode) {
@@ -509,16 +511,19 @@ function nextFrame(timeStamp) {
 			level[coord[0]][coord[1]] = 17;
 			drawLevel();
 		}
+		if (isTouching("any",21)) player.moveSpeed = 100;
+		if (isTouching("any",22)) player.moveSpeed = 200;
+		if (isTouching("any",23)) player.moveSpeed = 400;
 		// death block
 		if (isTouching("any",2) && !player.godMode) respawn();
 		// key input
-		if (control.left && player.xv > -200) {
-			player.xv -= 200;
-			if (player.xv < -200) player.xv = -200;
+		if (control.left && player.xv > -player.moveSpeed) {
+			player.xv -= player.moveSpeed;
+			if (player.xv < -player.moveSpeed) player.xv = -player.moveSpeed;
 		}
-		if (control.right && player.xv < 200) {
-			player.xv += 200;
-			if (player.xv > 200) player.xv = 200;
+		if (control.right && player.xv < player.moveSpeed) {
+			player.xv += player.moveSpeed;
+			if (player.xv > player.moveSpeed) player.xv = player.moveSpeed;
 		}
 		if (player.x < -1 || player.x > level.length*blockSize || player.y < -1 || player.y > level[0].length*blockSize) {
 			player.x = 0;
@@ -613,6 +618,15 @@ function drawLevel() {
 					break;
 				case 20:
 					lL.fillStyle = "#FFFF0088";
+					break;
+				case 21:
+					lL.fillStyle = "#00880088";
+					break;
+				case 22:
+					lL.fillStyle = "#00BB0088";
+					break;
+				case 23:
+					lL.fillStyle = "#00FF0088";
 					break;
 				default:
 					lL.fillStyle = "#00000000";
@@ -895,6 +909,32 @@ function drawLevel() {
 					lL.lineTo(xb+blockSize/2,yb+blockSize-blockSize/25*3);
 					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize/25*3);
 					lL.stroke();
+					break;
+				case 21:
+					lL.strokeStyle = "#00440088";
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/4,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize/4+blockSize/2,yb+blockSize/2);
+					lL.moveTo(xb+blockSize/4,yb+blockSize-blockSize/25*3);
+					break;
+				case 22:
+					lL.strokeStyle = "#00660088";
+					for (let i = 1; i < 3; i++) {
+						lL.beginPath();
+						lL.moveTo(xb+blockSize/5*i,yb+blockSize/25*3);
+						lL.lineTo(xb+blockSize/5*i+blockSize/2,yb+blockSize/2);
+						lL.moveTo(xb+blockSize/5*i,yb+blockSize-blockSize/25*3);
+					}
+					break;
+				case 23:
+					lL.strokeStyle = "#00880088";
+					lL.beginPath();
+					for (let i = 1; i < 4; i++) {
+						lL.beginPath();
+						lL.moveTo(xb+blockSize/6*i,yb+blockSize/25*3);
+						lL.lineTo(xb+blockSize/6*i+blockSize/2,yb+blockSize/2);
+						lL.moveTo(xb+blockSize/6*i,yb+blockSize-blockSize/25*3);
+					}
 					break;
 			}
 		}
