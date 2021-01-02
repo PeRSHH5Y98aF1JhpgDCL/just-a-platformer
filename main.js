@@ -9,7 +9,7 @@ const player = {
 	y: 0,
 	xv: 0,
 	yv: 0,
-	g: 400,
+	g: 350,
 	currentJumps: 0,
 	canWalljump: false,
 	wallJumpDir: "left",
