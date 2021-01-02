@@ -916,6 +916,7 @@ function drawLevel() {
 					lL.moveTo(xb+blockSize/4,yb+blockSize/25*3);
 					lL.lineTo(xb+blockSize/4+blockSize/2,yb+blockSize/2);
 					lL.moveTo(xb+blockSize/4,yb+blockSize-blockSize/25*3);
+					lL.stroke();
 					break;
 				case 22:
 					lL.strokeStyle = "#00660088";
@@ -924,6 +925,7 @@ function drawLevel() {
 						lL.moveTo(xb+blockSize/5*i,yb+blockSize/25*3);
 						lL.lineTo(xb+blockSize/5*i+blockSize/2,yb+blockSize/2);
 						lL.moveTo(xb+blockSize/5*i,yb+blockSize-blockSize/25*3);
+						lL.stroke();
 					}
 					break;
 				case 23:
@@ -934,6 +936,7 @@ function drawLevel() {
 						lL.moveTo(xb+blockSize/6*i,yb+blockSize/25*3);
 						lL.lineTo(xb+blockSize/6*i+blockSize/2,yb+blockSize/2);
 						lL.moveTo(xb+blockSize/6*i,yb+blockSize-blockSize/25*3);
+						lL.stroke();
 					}
 					break;
 			}
