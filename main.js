@@ -3,8 +3,8 @@ var gameSpeed = 1;
 var playerSize = 20;
 var blockSize = 50;
 const player = {
-	startPoint: [4,5,350,1,200],
-	spawnPoint: [4,5,350,1,200],
+	startPoint: [4,5,350,1,215],
+	spawnPoint: [4,5,350,1,215],
 	x: 0,
 	y: 0,
 	xv: 0,
@@ -14,8 +14,8 @@ const player = {
 	canWalljump: false,
 	wallJumpDir: "left",
 	maxJumps: 1,
-	moveSpeed: 200,
-	jumpHeight: 215,
+	moveSpeed: 215,
+	jumpHeight: 205,
 	godMode: false,
 	selectedBlock: [1,0],
 };
@@ -518,7 +518,7 @@ function nextFrame(timeStamp) {
 				if (player.g < 0) player.g = -player.g;
 			}
 			// grav magnitude
-			if (isTouching("any",8)) player.g = Math.sign(player.g)*195;
+			if (isTouching("any",8)) player.g = Math.sign(player.g)*170;
 			if (isTouching("any",9)) player.g = Math.sign(player.g)*350;
 			if (isTouching("any",10)) player.g = Math.sign(player.g)*650;
 			// multi-jump
@@ -576,9 +576,9 @@ function nextFrame(timeStamp) {
 				level[coord[0]][coord[1]] = 17;
 				shouldDrawLevel = true;
 			}
-			if (isTouching("any",21)) player.moveSpeed = 100;
-			if (isTouching("any",22)) player.moveSpeed = 200;
-			if (isTouching("any",23)) player.moveSpeed = 400;
+			if (isTouching("any",21)) player.moveSpeed = 106;
+			if (isTouching("any",22)) player.moveSpeed = 215;
+			if (isTouching("any",23)) player.moveSpeed = 430;
 			// death block
 			if (isTouching("any",2) && !player.godMode) respawn();
 			// key input
