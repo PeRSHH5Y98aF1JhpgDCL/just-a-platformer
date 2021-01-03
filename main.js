@@ -469,16 +469,14 @@ function nextFrame(timeStamp) {
 			   || ((getBlockType(x2b,y1b) == 24 || getBlockType(x1b,y1b) == 24)
 			       && ((!hasHitbox.includes(getBlockType(x2b,y1b)) || hasHitbox.includes(getBlockType(x2b,y1b+1)))
 				   || (!hasHitbox.includes(getBlockType(x1b,y1b)) || hasHitbox.includes(getBlockType(x1b,y1b+1))))))
-			   && player.g < 0) player.yv = -Math.sign(player.g)*600;
+			   && player.g < 0) player.yv = -Math.sign(player.g)*700;
 			if (((getBlockType(x2b,y1b) == 26 && getBlockType(x1b,y1b) == 26)
 			   || ((getBlockType(x2b,y1b) == 26 || getBlockType(x1b,y1b) == 26)
 			       && ((!hasHitbox.includes(getBlockType(x2b,y1b)) || hasHitbox.includes(getBlockType(x2b,y1b+1)))
 				   || (!hasHitbox.includes(getBlockType(x1b,y1b)) || hasHitbox.includes(getBlockType(x1b,y1b+1))))))
 			   && player.g < 0) {
-				if (player.g > 0) {
-					player.g = -player.g;
-					player.yv = -player.yv;
-				}
+				player.g = -player.g;
+				player.yv = -player.yv;
 			}
 			player.y = (y1b + 1) * blockSize;
 			if (player.g < 0 && player.yv <= 0) player.currentJumps = player.maxJumps;
@@ -495,16 +493,14 @@ function nextFrame(timeStamp) {
 			   || ((getBlockType(x2b,y2b) == 24 || getBlockType(x1b,y2b) == 24)
 			       && ((!hasHitbox.includes(getBlockType(x2b,y2b)) || hasHitbox.includes(getBlockType(x2b,y2b-1))) 
 				   || (!hasHitbox.includes(getBlockType(x1b,y2b)) || hasHitbox.includes(getBlockType(x1b,y2b-1))))))
-			   && player.g > 0) player.yv = -Math.sign(player.g)*600;
+			   && player.g > 0) player.yv = -Math.sign(player.g)*700;
 			if (((getBlockType(x2b,y2b) == 25 && getBlockType(x1b,y2b) == 25)
 			   || ((getBlockType(x2b,y2b) == 25 || getBlockType(x1b,y2b) == 25)
 			       && ((!hasHitbox.includes(getBlockType(x2b,y2b)) || hasHitbox.includes(getBlockType(x2b,y2b-1))) 
 				   || (!hasHitbox.includes(getBlockType(x1b,y2b)) || hasHitbox.includes(getBlockType(x1b,y2b-1))))))
 			   && player.g > 0) {
-				if (player.g < 0) {
-					player.g = -player.g;
-					player.yv = -player.yv;
-				}
+				player.g = -player.g;
+				player.yv = -player.yv;
 			}
 			player.y = y2b * blockSize - playerSize;
 			if (player.g > 0 && player.yv >= 0) player.currentJumps = player.maxJumps;
