@@ -411,8 +411,8 @@ function respawn() {
 }
 
 var lastFrame = 0;
-var haltThreshold = 50;
-var simReruns = 4;
+var haltThreshold = 100;
+var simReruns = 100;
 function nextFrame(timeStamp) {
 	// setup stuff
 	let dt = timeStamp - lastFrame;
