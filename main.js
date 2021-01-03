@@ -3,8 +3,8 @@ var gameSpeed = 1;
 var playerSize = 20;
 var blockSize = 50;
 const player = {
-	startPoint: [4,5,350,1,215],
-	spawnPoint: [4,5,350,1,215],
+	startPoint: [4,5,350,1,650],
+	spawnPoint: [4,5,350,1,650],
 	x: 0,
 	y: 0,
 	xv: 0,
@@ -14,7 +14,7 @@ const player = {
 	canWalljump: false,
 	wallJumpDir: "left",
 	maxJumps: 1,
-	moveSpeed: 215,
+	moveSpeed: 650,
 	jumpHeight: 205,
 	godMode: false,
 	selectedBlock: [1,0],
@@ -156,11 +156,11 @@ document.addEventListener("keydown", function(input){
 		case "KeyW":
 			if (player.canWalljump) {
 				if (player.wallJumpDir == "left") {
-					player.xv = -player.moveSpeed*5;
+					player.xv = -player.moveSpeed/2;
 					player.yv = -Math.sign(player.g)*player.jumpHeight;
 				}
 				if (player.wallJumpDir == "right") {
-					player.xv = player.moveSpeed*5;
+					player.xv = player.moveSpeed/2;
 					player.yv = -Math.sign(player.g)*player.jumpHeight;
 				}
 			} else if (player.currentJumps > 0 || player.godMode) {
@@ -425,7 +425,7 @@ function nextFrame(timeStamp) {
 		let shouldDrawLevel = false;
 		for (let i = 0; i < simReruns; i++) {
 			// velocity change
-			player.xv *= 0.5;
+			player.xv -= Math.pow(0.5,1/dt);
 			if (Math.abs(player.xv) < 5) player.xv = 0;
 			player.yv += player.g * dt / 500 * gameSpeed;
 			if (player.yv > player.g && player.g > 0) player.yv = player.g;
@@ -576,9 +576,9 @@ function nextFrame(timeStamp) {
 				level[coord[0]][coord[1]] = 17;
 				shouldDrawLevel = true;
 			}
-			if (isTouching("any",21)) player.moveSpeed = 106;
-			if (isTouching("any",22)) player.moveSpeed = 215;
-			if (isTouching("any",23)) player.moveSpeed = 430;
+			if (isTouching("any",21)) player.moveSpeed = 325;
+			if (isTouching("any",22)) player.moveSpeed = 650;
+			if (isTouching("any",23)) player.moveSpeed = 1300;
 			// death block
 			if (isTouching("any",2) && !player.godMode) respawn();
 			// key input
