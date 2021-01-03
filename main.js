@@ -35,12 +35,13 @@ var level = [
 	[1,0,0,0,0,0,0,0,1],
 	[1,1,1,1,1,1,1,1,1]
 ];
-const hasHitbox = [1,5,11];
-const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block",
-		   "G-Up Field","G-Down Field","G-Low Field","G-Medium Field","G-High Field",
-		   "Wall-Jump Block","0-Jump Field","1-Jump Field","2-Jump Field","3-Jump Field","Inf-Jump Field",
-		   "Start","Goal","Deactivated Start (Unavailable)","Activated Goal (Unavailable)",
-		   "S-Slow Field","S-Normal Field","S-Fast Field"];
+const hasHitbox = [1,5,11,24,25,26];
+const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Activated Check Point (Unavailable)","Bounce Block", // basic
+		   "G-Up Field","G-Down Field","G-Low Field","G-Medium Field","G-High Field", // grav
+		   "Wall-Jump Block","0-Jump Field","1-Jump Field","2-Jump Field","3-Jump Field","Inf-Jump Field", // jumping
+		   "Start","Goal","Deactivated Start (Unavailable)","Activated Goal (Unavailable)", // exclusive
+		   "S-Slow Field","S-Normal Field","S-Fast Field" // speed
+		   "Bounce Block++","G-Bounce Up","G-Bounce Down"]; // extra
 const bannedBlock = [4,19,20];
 
 id("levelLayer").addEventListener("mousedown", function(input){
@@ -464,6 +465,21 @@ function nextFrame(timeStamp) {
 			       && ((!hasHitbox.includes(getBlockType(x2b,y1b)) || hasHitbox.includes(getBlockType(x2b,y1b+1)))
 				   || (!hasHitbox.includes(getBlockType(x1b,y1b)) || hasHitbox.includes(getBlockType(x1b,y1b+1))))))
 			   && player.g < 0) player.yv = -Math.sign(player.g)*300;
+			if (((getBlockType(x2b,y1b) == 24 && getBlockType(x1b,y1b) == 24)
+			   || ((getBlockType(x2b,y1b) == 24 || getBlockType(x1b,y1b) == 24)
+			       && ((!hasHitbox.includes(getBlockType(x2b,y1b)) || hasHitbox.includes(getBlockType(x2b,y1b+1)))
+				   || (!hasHitbox.includes(getBlockType(x1b,y1b)) || hasHitbox.includes(getBlockType(x1b,y1b+1))))))
+			   && player.g < 0) player.yv = -Math.sign(player.g)*600;
+			if (((getBlockType(x2b,y1b) == 26 && getBlockType(x1b,y1b) == 26)
+			   || ((getBlockType(x2b,y1b) == 26 || getBlockType(x1b,y1b) == 26)
+			       && ((!hasHitbox.includes(getBlockType(x2b,y1b)) || hasHitbox.includes(getBlockType(x2b,y1b+1)))
+				   || (!hasHitbox.includes(getBlockType(x1b,y1b)) || hasHitbox.includes(getBlockType(x1b,y1b+1))))))
+			   && player.g < 0) {
+				if (player.g > 0) {
+					player.g = -player.g;
+					player.yv = -player.yv;
+				}
+			}
 			player.y = (y1b + 1) * blockSize;
 			if (player.g < 0 && player.yv <= 0) player.currentJumps = player.maxJumps;
 		} else if (player.g < 0 && player.currentJumps == player.maxJumps) player.currentJumps = player.maxJumps - 1;
@@ -475,6 +491,21 @@ function nextFrame(timeStamp) {
 			       && ((!hasHitbox.includes(getBlockType(x2b,y2b)) || hasHitbox.includes(getBlockType(x2b,y2b-1))) 
 				   || (!hasHitbox.includes(getBlockType(x1b,y2b)) || hasHitbox.includes(getBlockType(x1b,y2b-1))))))
 			   && player.g > 0) player.yv = -Math.sign(player.g)*300;
+			if (((getBlockType(x2b,y2b) == 24 && getBlockType(x1b,y2b) == 24)
+			   || ((getBlockType(x2b,y2b) == 24 || getBlockType(x1b,y2b) == 24)
+			       && ((!hasHitbox.includes(getBlockType(x2b,y2b)) || hasHitbox.includes(getBlockType(x2b,y2b-1))) 
+				   || (!hasHitbox.includes(getBlockType(x1b,y2b)) || hasHitbox.includes(getBlockType(x1b,y2b-1))))))
+			   && player.g > 0) player.yv = -Math.sign(player.g)*600;
+			if (((getBlockType(x2b,y2b) == 25 && getBlockType(x1b,y2b) == 25)
+			   || ((getBlockType(x2b,y2b) == 25 || getBlockType(x1b,y2b) == 25)
+			       && ((!hasHitbox.includes(getBlockType(x2b,y2b)) || hasHitbox.includes(getBlockType(x2b,y2b-1))) 
+				   || (!hasHitbox.includes(getBlockType(x1b,y2b)) || hasHitbox.includes(getBlockType(x1b,y2b-1))))))
+			   && player.g > 0) {
+				if (player.g < 0) {
+					player.g = -player.g;
+					player.yv = -player.yv;
+				}
+			}
 			player.y = y2b * blockSize - playerSize;
 			if (player.g > 0 && player.yv >= 0) player.currentJumps = player.maxJumps;
 		} else if (player.g > 0 && player.currentJumps == player.maxJumps) player.currentJumps = player.maxJumps - 1;
@@ -660,6 +691,15 @@ function drawLevel() {
 					break;
 				case 23:
 					lL.fillStyle = "#00FF0088";
+					break;
+				case 24:
+					lL.fillStyle = "#FF00FF";
+					break;
+				case 25:
+					lL.fillStyle = "#FF0000";
+					break;
+				case 26:
+					lL.fillStyle = "#0000FF";
 					break;
 				default:
 					lL.fillStyle = "#00000000";
@@ -974,6 +1014,48 @@ function drawLevel() {
 						lL.lineTo(xb+blockSize/8*i,yb+blockSize-blockSize/25*3);
 						lL.stroke();
 					}
+					break;
+				case 24:
+					lL.strokeStyle = "#880088";
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize/4);
+					lL.lineTo(xb+blockSize/2,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize/4);
+					lL.stroke();
+
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/4);
+					lL.lineTo(xb+blockSize/2,yb+blockSize-blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/4);
+					lL.stroke();
+					break;
+				case 25:
+					lL.strokeStyle = "#880000";
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize/4);
+					lL.lineTo(xb+blockSize/2,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize/4);
+					lL.stroke();
+
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/4);
+					lL.lineTo(xb+blockSize/2,yb+blockSize-blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/4);
+					lL.stroke();
+					break;
+				case 26:
+					lL.strokeStyle = "#000088";
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize/4);
+					lL.lineTo(xb+blockSize/2,yb+blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize/4);
+					lL.stroke();
+
+					lL.beginPath();
+					lL.moveTo(xb+blockSize/25*3,yb+blockSize-blockSize/4);
+					lL.lineTo(xb+blockSize/2,yb+blockSize-blockSize/25*3);
+					lL.lineTo(xb+blockSize-blockSize/25*3,yb+blockSize-blockSize/4);
+					lL.stroke();
 					break;
 			}
 		}
