@@ -695,7 +695,7 @@ function drawLevel() {
 					lL.fillStyle = "#FF0000";
 					break;
 				case 26:
-					lL.fillStyle = "#0000FF";
+					lL.fillStyle = "#00FFFF";
 					break;
 				default:
 					lL.fillStyle = "#00000000";
@@ -1040,7 +1040,7 @@ function drawLevel() {
 					lL.stroke();
 					break;
 				case 26:
-					lL.strokeStyle = "#000088";
+					lL.strokeStyle = "#008888";
 					lL.beginPath();
 					lL.moveTo(xb+blockSize/25*3,yb+blockSize/4);
 					lL.lineTo(xb+blockSize/2,yb+blockSize/25*3);
