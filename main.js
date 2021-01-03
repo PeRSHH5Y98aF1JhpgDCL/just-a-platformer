@@ -476,7 +476,7 @@ function nextFrame(timeStamp) {
 				   || (!hasHitbox.includes(getBlockType(x1b,y1b)) || hasHitbox.includes(getBlockType(x1b,y1b+1))))))
 			   && player.g < 0) {
 				player.g = -player.g;
-				player.yv = -player.yv;
+				player.yv = player.g/2;
 			}
 			player.y = (y1b + 1) * blockSize;
 			if (player.g < 0 && player.yv <= 0) player.currentJumps = player.maxJumps;
@@ -500,7 +500,7 @@ function nextFrame(timeStamp) {
 				   || (!hasHitbox.includes(getBlockType(x1b,y2b)) || hasHitbox.includes(getBlockType(x1b,y2b-1))))))
 			   && player.g > 0) {
 				player.g = -player.g;
-				player.yv = -player.yv;
+				player.yv = player.g/2;
 			}
 			player.y = y2b * blockSize - playerSize;
 			if (player.g > 0 && player.yv >= 0) player.currentJumps = player.maxJumps;
