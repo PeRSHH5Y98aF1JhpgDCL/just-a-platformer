@@ -583,11 +583,11 @@ function nextFrame(timeStamp) {
 			if (isTouching("any",2) && !player.godMode) respawn();
 			// key input
 			if (control.left && player.xv > -player.moveSpeed) {
-				player.xv -= player.moveSpeed;
+				player.xv -= player.moveSpeed * dt;
 				if (player.xv < -player.moveSpeed) player.xv = -player.moveSpeed;
 			}
 			if (control.right && player.xv < player.moveSpeed) {
-				player.xv += player.moveSpeed;
+				player.xv += player.moveSpeed * dt;
 				if (player.xv > player.moveSpeed) player.xv = player.moveSpeed;
 			}
 			if (player.x < -1 || player.x > level.length*blockSize || player.y < -1 || player.y > level[0].length*blockSize) {
