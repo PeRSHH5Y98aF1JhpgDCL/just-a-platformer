@@ -15,6 +15,7 @@ const player = {
 	wallJumpDir: "left",
 	maxJumps: 1,
 	moveSpeed: 200,
+	jumpHeight: 215,
 	godMode: false,
 	selectedBlock: [1,0],
 };
@@ -156,14 +157,14 @@ document.addEventListener("keydown", function(input){
 			if (player.canWalljump) {
 				if (player.wallJumpDir == "left") {
 					player.xv = -player.moveSpeed*5;
-					player.yv = -Math.sign(player.g)*215;
+					player.yv = -Math.sign(player.g)*player.jumpHeight;
 				}
 				if (player.wallJumpDir == "right") {
 					player.xv = player.moveSpeed*5;
-					player.yv = -Math.sign(player.g)*215;
+					player.yv = -Math.sign(player.g)*player.jumpHeight;
 				}
 			} else if (player.currentJumps > 0 || player.godMode) {
-				player.yv = -Math.sign(player.g)*215;
+				player.yv = -Math.sign(player.g)*player.jumpHeight;
 				player.currentJumps--;
 			}
 			break;
