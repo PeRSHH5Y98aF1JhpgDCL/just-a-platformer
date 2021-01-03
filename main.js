@@ -40,7 +40,7 @@ const blockName = ["Empty Space","Solid Block","Death Block","Check Point","Acti
 		   "G-Up Field","G-Down Field","G-Low Field","G-Medium Field","G-High Field", // grav
 		   "Wall-Jump Block","0-Jump Field","1-Jump Field","2-Jump Field","3-Jump Field","Inf-Jump Field", // jumping
 		   "Start","Goal","Deactivated Start (Unavailable)","Activated Goal (Unavailable)", // exclusive
-		   "S-Slow Field","S-Normal Field","S-Fast Field" // speed
+		   "S-Slow Field","S-Normal Field","S-Fast Field", // speed
 		   "Bounce Block++","G-Bounce Up","G-Bounce Down"]; // extra
 const bannedBlock = [4,19,20];
 
