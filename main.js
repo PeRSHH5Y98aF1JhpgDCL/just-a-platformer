@@ -156,14 +156,14 @@ document.addEventListener("keydown", function(input){
 			if (player.canWalljump) {
 				if (player.wallJumpDir == "left") {
 					player.xv = -player.moveSpeed*5;
-					player.yv = -Math.sign(player.g)*225;
+					player.yv = -Math.sign(player.g)*215;
 				}
 				if (player.wallJumpDir == "right") {
 					player.xv = player.moveSpeed*5;
-					player.yv = -Math.sign(player.g)*225;
+					player.yv = -Math.sign(player.g)*215;
 				}
 			} else if (player.currentJumps > 0 || player.godMode) {
-				player.yv = -Math.sign(player.g)*225;
+				player.yv = -Math.sign(player.g)*215;
 				player.currentJumps--;
 			}
 			break;
