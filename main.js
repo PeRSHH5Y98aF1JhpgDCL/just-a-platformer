@@ -412,16 +412,17 @@ function respawn() {
 
 var lastFrame = 0;
 var haltThreshold = 50;
+var simReruns = 4;
 function nextFrame(timeStamp) {
 	// setup stuff
 	let dt = timeStamp - lastFrame;
 	lastFrame = timeStamp;
 	if (dt < haltThreshold) {
-		dt = dt/4;
+		dt = dt/simReruns;
 		let xprev = player.x;
 		let yprev = player.y;
 		let shouldDrawLevel = false;
-		for (let i = 0; i < 4; i++) {
+		for (let i = 0; i < simReruns; i++) {
 			// velocity change
 			player.xv *= 0.5;
 			if (Math.abs(player.xv) < 5) player.xv = 0;
