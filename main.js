@@ -420,7 +420,7 @@ function nextFrame(timeStamp) {
 		dt = dt/4;
 		let xprev = player.x;
 		let yprev = player.y;
-		let shouldDrawLevel == false;
+		let shouldDrawLevel = false;
 		for (let i = 0; i < 4; i++) {
 			// velocity change
 			player.xv *= 0.5;
