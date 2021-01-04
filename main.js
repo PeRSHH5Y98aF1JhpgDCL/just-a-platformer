@@ -425,7 +425,7 @@ function nextFrame(timeStamp) {
 		let shouldDrawLevel = false;
 		for (let i = 0; i < simReruns; i++) {
 			// velocity change
-			player.xv *= Math.pow(0.5,dt/15);
+			player.xv *= Math.pow(0.5,dt/12);
 			if (Math.abs(player.xv) < 5) player.xv = 0;
 			player.yv += player.g * dt / 500 * gameSpeed;
 			if (player.yv > player.g && player.g > 0) player.yv = player.g;
@@ -450,7 +450,7 @@ function nextFrame(timeStamp) {
 					if (player.yv < player.g/10 && player.g < 0) player.yv = player.g/10;
 					player.canWalljump = true;
 					player.wallJumpDir = "right";
-				} else player.canWalljump = false;
+				} else if (i == 99) player.canWalljump = false;
 				player.x = (x1b + 1) * blockSize;
 			} else if (isTouching("right")) { // right wall
 				player.xv = 0;
@@ -459,7 +459,7 @@ function nextFrame(timeStamp) {
 					if (player.yv < player.g/10 && player.g < 0) player.yv = player.g/10;
 					player.canWalljump = true;
 					player.wallJumpDir = "left";
-				} else player.canWalljump = false;
+				} else if (i == 99) player.canWalljump = false;
 				player.x = x2b * blockSize - playerSize;
 			} else player.canWalljump = false;
 			// ceiling
