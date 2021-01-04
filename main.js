@@ -156,11 +156,11 @@ document.addEventListener("keydown", function(input){
 		case "KeyW":
 			if (player.canWalljump) {
 				if (player.wallJumpDir == "left") {
-					player.xv = -player.moveSpeed/2;
+					player.xv = -player.moveSpeed;
 					player.yv = -Math.sign(player.g)*player.jumpHeight;
 				}
 				if (player.wallJumpDir == "right") {
-					player.xv = player.moveSpeed/2;
+					player.xv = player.moveSpeed;
 					player.yv = -Math.sign(player.g)*player.jumpHeight;
 				}
 			} else if (player.currentJumps > 0 || player.godMode) {
