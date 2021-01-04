@@ -469,7 +469,7 @@ function nextFrame(timeStamp) {
 				   || ((getBlockType(x2b,y1b) == 5 || getBlockType(x1b,y1b) == 5)
 				       && ((!hasHitbox.includes(getBlockType(x2b,y1b)) || hasHitbox.includes(getBlockType(x2b,y1b+1)))
 					   || (!hasHitbox.includes(getBlockType(x1b,y1b)) || hasHitbox.includes(getBlockType(x1b,y1b+1))))))
-				   && player.g < 0) player.yv = -Math.sign(player.g)*300;
+				   && player.g < 0) player.yv = -Math.sign(player.g)*275;
 				if (((getBlockType(x2b,y1b) == 24 && getBlockType(x1b,y1b) == 24)
 				   || ((getBlockType(x2b,y1b) == 24 || getBlockType(x1b,y1b) == 24)
 				       && ((!hasHitbox.includes(getBlockType(x2b,y1b)) || hasHitbox.includes(getBlockType(x2b,y1b+1)))
@@ -493,7 +493,7 @@ function nextFrame(timeStamp) {
 				   || ((getBlockType(x2b,y2b) == 5 || getBlockType(x1b,y2b) == 5)
 				       && ((!hasHitbox.includes(getBlockType(x2b,y2b)) || hasHitbox.includes(getBlockType(x2b,y2b-1))) 
 					   || (!hasHitbox.includes(getBlockType(x1b,y2b)) || hasHitbox.includes(getBlockType(x1b,y2b-1))))))
-				   && player.g > 0) player.yv = -Math.sign(player.g)*300;
+				   && player.g > 0) player.yv = -Math.sign(player.g)*275;
 				if (((getBlockType(x2b,y2b) == 24 && getBlockType(x1b,y2b) == 24)
 				   || ((getBlockType(x2b,y2b) == 24 || getBlockType(x1b,y2b) == 24)
 				       && ((!hasHitbox.includes(getBlockType(x2b,y2b)) || hasHitbox.includes(getBlockType(x2b,y2b-1))) 
