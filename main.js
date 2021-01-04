@@ -425,7 +425,7 @@ function nextFrame(timeStamp) {
 		let shouldDrawLevel = false;
 		for (let i = 0; i < simReruns; i++) {
 			// velocity change
-			player.xv *= Math.pow(0.5,dt/500);
+			player.xv *= Math.pow(0.5,dt/50);
 			if (Math.abs(player.xv) < 5) player.xv = 0;
 			player.yv += player.g * dt / 500 * gameSpeed;
 			if (player.yv > player.g && player.g > 0) player.yv = player.g;
@@ -583,13 +583,14 @@ function nextFrame(timeStamp) {
 			if (isTouching("any",2) && !player.godMode) respawn();
 			// key input
 			if (control.left && player.xv > -player.moveSpeed) {
-				player.xv -= player.moveSpeed /500 * dt;
+				player.xv -= player.moveSpeed /100 * dt;
 				if (player.xv < -player.moveSpeed) player.xv = -player.moveSpeed;
 			}
 			if (control.right && player.xv < player.moveSpeed) {
-				player.xv += player.moveSpeed /500 * dt;
+				player.xv += player.moveSpeed /100 * dt;
 				if (player.xv > player.moveSpeed) player.xv = player.moveSpeed;
 			}
+			// OoB check
 			if (player.x < -1 || player.x > level.length*blockSize || player.y < -1 || player.y > level[0].length*blockSize) {
 				player.x = 0;
 				player.y = 0;
