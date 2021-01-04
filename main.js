@@ -581,20 +581,20 @@ function nextFrame(timeStamp) {
 			if (isTouching("any",23)) player.moveSpeed = 1300;
 			// death block
 			if (isTouching("any",2) && !player.godMode) respawn();
-			// key input
-			if (control.left && player.xv > -player.moveSpeed) {
-				player.xv -= player.moveSpeed /100 * dt;
-				if (player.xv < -player.moveSpeed) player.xv = -player.moveSpeed;
-			}
-			if (control.right && player.xv < player.moveSpeed) {
-				player.xv += player.moveSpeed /100 * dt;
-				if (player.xv > player.moveSpeed) player.xv = player.moveSpeed;
-			}
 			// OoB check
 			if (player.x < -1 || player.x > level.length*blockSize || player.y < -1 || player.y > level[0].length*blockSize) {
 				player.x = 0;
 				player.y = 0;
 			}
+		}
+		// key input
+		if (control.left && player.xv > -player.moveSpeed) {
+			player.xv -= player.moveSpeed / 100 * dt * simReruns;
+			if (player.xv < -player.moveSpeed) player.xv = -player.moveSpeed;
+		}
+		if (control.right && player.xv < player.moveSpeed) {
+			player.xv += player.moveSpeed / 100 * dt * simReruns;
+			if (player.xv > player.moveSpeed) player.xv = player.moveSpeed;
 		}
 		// draw checks
 		if (player.x != xprev || player.y != yprev) drawPlayer();
