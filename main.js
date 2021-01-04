@@ -3,8 +3,8 @@ var gameSpeed = 1;
 var playerSize = 20;
 var blockSize = 50;
 const player = {
-	startPoint: [4,5,350,1,650],
-	spawnPoint: [4,5,350,1,650],
+	startPoint: [4,5,350,1,750],
+	spawnPoint: [4,5,350,1,750],
 	x: 0,
 	y: 0,
 	xv: 0,
@@ -14,7 +14,7 @@ const player = {
 	canWalljump: false,
 	wallJumpDir: "left",
 	maxJumps: 1,
-	moveSpeed: 650,
+	moveSpeed: 750,
 	jumpHeight: 205,
 	godMode: false,
 	selectedBlock: [1,0],
@@ -576,9 +576,9 @@ function nextFrame(timeStamp) {
 				level[coord[0]][coord[1]] = 17;
 				shouldDrawLevel = true;
 			}
-			if (isTouching("any",21)) player.moveSpeed = 325;
-			if (isTouching("any",22)) player.moveSpeed = 650;
-			if (isTouching("any",23)) player.moveSpeed = 1300;
+			if (isTouching("any",21)) player.moveSpeed = 375;
+			if (isTouching("any",22)) player.moveSpeed = 750;
+			if (isTouching("any",23)) player.moveSpeed = 1500;
 			// death block
 			if (isTouching("any",2) && !player.godMode) respawn();
 			// OoB check
