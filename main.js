@@ -444,24 +444,24 @@ function nextFrame(timeStamp) {
 			let y2b = Math.floor(y2/blockSize);
 			// left wall
 			if (isTouching("left")) {
-				player.xv = 0;
 				if ((getBlockType(x1b,y1b) == 11 || getBlockType(x1b,y2b) == 11) && control.left) {
 					if (player.yv > player.g/10 && player.g > 0) player.yv = player.g/10;
 					if (player.yv < player.g/10 && player.g < 0) player.yv = player.g/10;
 					player.canWalljump = true;
 					player.wallJumpDir = "right";
-				} else if (i == 99) player.canWalljump = false;
+				} else if (i == 0) player.canWalljump = false;
+				player.xv = 0;
 				player.x = (x1b + 1) * blockSize;
 			} else if (isTouching("right")) { // right wall
-				player.xv = 0;
 				if ((getBlockType(x2b,y1b) == 11 || getBlockType(x2b,y2b) == 11) && control.right) {
 					if (player.yv > player.g/10 && player.g > 0) player.yv = player.g/10;
 					if (player.yv < player.g/10 && player.g < 0) player.yv = player.g/10;
 					player.canWalljump = true;
 					player.wallJumpDir = "left";
-				} else if (i == 99) player.canWalljump = false;
+				} else if (i == 0) player.canWalljump = false;
+				player.xv = 0;
 				player.x = x2b * blockSize - playerSize;
-			} else player.canWalljump = false;
+			} else if (i == 0) player.canWalljump = false;
 			// ceiling
 			if (isTouching("up")) {
 				player.yv = 0;
