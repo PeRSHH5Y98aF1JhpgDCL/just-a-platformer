@@ -3,13 +3,13 @@ var gameSpeed = 1;
 var playerSize = 20;
 var blockSize = 50;
 const player = {
-	startPoint: [4,5,350,1,750],
-	spawnPoint: [4,5,350,1,750],
+	startPoint: [4,5,325,1,750],
+	spawnPoint: [4,5,325,1,750],
 	x: 0,
 	y: 0,
 	xv: 0,
 	yv: 0,
-	g: 350,
+	g: 325,
 	currentJumps: 0,
 	canWalljump: false,
 	wallJumpDir: "left",
@@ -519,7 +519,7 @@ function nextFrame(timeStamp) {
 			}
 			// grav magnitude
 			if (isTouching("any",8)) player.g = Math.sign(player.g)*170;
-			if (isTouching("any",9)) player.g = Math.sign(player.g)*350;
+			if (isTouching("any",9)) player.g = Math.sign(player.g)*325;
 			if (isTouching("any",10)) player.g = Math.sign(player.g)*650;
 			// multi-jump
 			if (isTouching("any",12)) {
